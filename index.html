@@ -73,13 +73,64 @@
             white-space: pre-wrap; /* Mantiene saltos de línea y espacios */
         }
         .markdown-content ul {
-            list-style-type: disc;
-            padding-left: 1.5rem;
+            list-style-type: none; /* Quitamos los puntos de lista del renderizador de markdown */
+            padding-left: 0; 
             margin-top: 0.5rem;
             margin-bottom: 0.5rem;
         }
         .markdown-content li {
             margin-bottom: 0.25rem;
+        }
+
+        /* Estilos para Tablas */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem; /* text-sm */
+        }
+        .data-table th, .data-table td {
+            border: 1px solid #e5e7eb; /* gray-200 */
+            padding: 0.75rem;
+            text-align: left;
+        }
+        .data-table th {
+            background-color: #f3f4f6; /* gray-100 */
+            font-weight: 600;
+            color: #374151; /* gray-700 */
+        }
+        .data-table tr:nth-child(even) {
+            background-color: #f9fafb; /* gray-50 */
+        }
+
+        /* Estilo para la barra de progreso de Grados */
+        progress {
+            /* Estilo base */
+            appearance: none;
+            width: 100%;
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            background-color: #e5e7eb; /* Fondo gris claro */
+        }
+
+        progress::-webkit-progress-bar {
+            background-color: #e5e7eb;
+        }
+
+        progress::-webkit-progress-value {
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+
+        progress.grade-1::-webkit-progress-value { background-color: #22c55e; } /* Verde - Bajo */
+        progress.grade-2::-webkit-progress-value { background-color: #f97316; } /* Naranja - Medio */
+        progress.grade-3::-webkit-progress-value { background-color: #dc2626; } /* Rojo - Alto */
+        progress.grade-4::-webkit-progress-value { background-color: #4b5563; } /* Gris Oscuro - Máximo */
+
+        .flex-center {
+            display: flex;
+            align-items: center;
         }
         
     </style>
@@ -101,78 +152,213 @@
 
         <main class="bg-white p-6 md:p-10 rounded-b-xl shadow-lg">
             
-            <!-- SECCIÓN 1: UT1 - INTRODUCCIÓN Y COMPONENTES -->
+            <!-- SECCIÓN 1: UT1 - INTRODUCCIÓN Y COMPONENTES (Contenido Ampliado) -->
             <section id="ut1-section" class="main-content-section active">
                 <div class="text-center mb-8">
-                    <h2 class="text-2xl font-semibold mb-4 text-gray-700 border-b pb-2">UT1: Introducción a los Sistemas de Seguridad Electrónica</h2>
-                    <p class="max-w-4xl mx-auto text-gray-600">Fundamentos, clasificaciones y elementos clave para la protección de personas y bienes.</p>
+                    <h2 class="text-2xl font-semibold mb-4 text-gray-700 border-b pb-2 flex-center justify-center"><i class="ph ph-shield-check-fill text-3xl mr-2 text-green-500"></i> UT1: Sistemas de Seguridad Electrónica 🛡️</h2>
+                    <p class="max-w-4xl mx-auto text-gray-600">Conjunto de equipos y componentes para la protección de personas y bienes. La variación de los sistemas depende de las <strong>necesidades del usuario</strong>, las <strong>características del recinto</strong> y el <strong>presupuesto</strong>.</p>
                 </div>
 
-                <!-- CLASIFICACIÓN -->
-                <h3 class="text-xl font-bold mb-4 text-blue-600 border-b pb-2">1. Clasificación de Sistemas de Seguridad</h3>
-                <p class="text-gray-700 mb-4">Un sistema de seguridad electrónica es un conjunto de equipos para garantizar la protección frente a agresiones externas. Varían según las <span class="font-bold">necesidades del usuario</span>, las <span class="font-bold">características del recinto</span> y el <span class="font-bold">presupuesto</span>.</p>
+                <!-- 1. CLASIFICACIÓN -->
+                <h3 class="text-xl font-bold mb-4 text-blue-600 border-b pb-2 flex-center"><i class="ph ph-list-numbers-fill mr-2"></i> 1. Clasificación de Sistemas de Seguridad Electrónica 🏷️</h3>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                     <div class="info-card p-4 rounded-lg border-l-4 border-indigo-500 bg-indigo-50">
-                        <h4 class="font-bold text-lg text-indigo-700">Según Obligatoriedad</h4>
-                        <ul class="list-disc list-inside text-sm text-gray-700 pl-2">
-                            <li><span class="font-semibold">Obligatoria:</span> Exigida por ley (ej. bancos, joyerías, hospitales).</li>
-                            <li><span class="font-semibold">Opcional:</span> Decisión del propietario (ej. vivienda particular, pequeño negocio).</li>
+                        <h4 class="font-bold text-lg text-indigo-700 flex-center"><i class="ph ph-factory-fill mr-2 text-xl"></i> Seguridad de las Instalaciones 🏢</h4>
+                        <ul class="list-disc list-inside text-sm text-gray-700 pl-2 space-y-2">
+                            <li><span class="font-semibold">Sistemas Contra Incendio:</span> Localizar, dar aviso y accionar <strong class="text-red-600">extinción automática</strong>.</li>
+                            <li><span class="font-semibold">Sistemas de Detección de Gas:</span> Alerta sobre riesgo de <strong class="text-red-600">explosión, intoxicación o asfixia</strong>.</li>
                         </ul>
                     </div>
                     <div class="info-card p-4 rounded-lg border-l-4 border-purple-500 bg-purple-50">
-                        <h4 class="font-bold text-lg text-purple-700">Según Tipo de Amenaza</h4>
-                        <ul class="list-disc list-inside text-sm text-gray-700 pl-2">
-                            <li><span class="font-semibold">Sistemas Antirrobo</span> e Intrusión.</li>
-                            <li><span class="font-semibold">Circuito Cerrado de Televisión</span> (CCTV).</li>
-                            <li><span class="font-semibold">Detección de Incendio</span> y Gas.</li>
-                            <li><span class="font-semibold">Control de Accesos</span> (Biométricos, Tarjetas).</li>
+                        <h4 class="font-bold text-lg text-purple-700 flex-center"><i class="ph ph-lock-key-fill mr-2 text-xl"></i> Seguridad Privada 🔑</h4>
+                        <ul class="list-disc list-inside text-sm text-gray-700 pl-2 space-y-2">
+                            <li><span class="font-semibold">Sistemas Antirrobo e Intrusión:</span> Advierte de allanamiento. Incluye <strong>Control de Presencia</strong> y <strong class="text-purple-700">Control de Accesos</strong> (gestión de entrada/salida).</li>
+                            <li><span class="font-semibold">Circuito Cerrado de Televisión (CCTV):</span> <strong class="text-purple-700">Videovigilancia</strong> para disuasión y prueba forense.</li>
                         </ul>
                     </div>
                 </div>
 
-                <!-- GRADOS DE SEGURIDAD -->
-                <h3 class="text-xl font-bold mb-4 text-red-600 border-b pb-2">2. Grados de Seguridad (UNE-EN 50131)</h3>
-                <p class="text-gray-700 mb-4">Los grados definen el nivel de riesgo y los requisitos mínimos de instalación y funcionamiento del sistema, siendo el Grado 4 el más exigente.</p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                    <div class="info-card p-4 rounded-lg border border-gray-300 bg-white shadow-sm">
-                        <h4 class="font-bold text-xl text-gray-700">Grado 1</h4>
-                        <p class="text-sm text-gray-500"><span class="font-semibold">Riesgo Bajo</span>. No requiere conexión a CRA. Uso doméstico sin alto valor.</p>
+                <!-- 2. GRADOS DE SEGURIDAD (Con Perfil de Sabotaje) -->
+                <h3 class="text-xl font-bold mb-4 text-red-600 border-b pb-2 flex-center"><i class="ph ph-star-fill mr-2"></i> 2. Grados de Seguridad (UNE-EN 50131-1) ⭐</h3>
+                <p class="text-gray-700 mb-4">Los grados definen el nivel de riesgo y los requisitos mínimos del sistema, basándose en el <strong>valor a proteger</strong> y la <strong>capacidad del intruso</strong> para eludirlo.</p>
+
+                <div class="overflow-x-auto rounded-lg shadow-md mb-8">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th class="w-1/12 bg-red-100">Grado</th>
+                                <th class="w-3/12 bg-red-100">Nivel de Riesgo y Robustez</th>
+                                <th class="w-4/12 bg-red-100">Perfil del Sabotaje (Probabilidad)</th>
+                                <th class="w-2/12 bg-red-100">Conexión a CRA</th>
+                                <th class="w-2/12 bg-red-100">Visualización de Robustez</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-bold text-red-600">Grado 1</td>
+                                <td>Bajo (Sistemas disuasorios)</td>
+                                <td><strong>Muy poco probable</strong> que se intente eludir.</td>
+                                <td>No obligatoria.</td>
+                                <td><progress class="grade-1" value="1" max="4"></progress></td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-orange-600">Grado 2</td>
+                                <td>Bajo-Medio (Viviendas y Comercios)</td>
+                                <td><strong>Poco probable</strong> el intento de eludir.</td>
+                                <td>Opcional / Requerida.</td>
+                                <td><progress class="grade-2" value="2" max="4"></progress></td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-yellow-700">Grado 3</td>
+                                <td>Medio-Alto (Riesgo Alto)</td>
+                                <td><strong>Probable</strong> que se intente eludir o sabotear. <strong class="text-yellow-700">Doble vía de comunicación</strong> obligatoria.</td>
+                                <td><strong>Obligatoria</strong>.</td>
+                                <td><progress class="grade-3" value="3" max="4"></progress></td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold text-gray-700">Grado 4</td>
+                                <td>Alto (Máxima Seguridad)</td>
+                                <td><strong>Muy probable</strong> el sabotaje con herramientas y técnicas especializadas.</td>
+                                <td>Opcional / Requerida.</td>
+                                <td><progress class="grade-4" value="4" max="4"></progress></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 3. COMPONENTES FUNDAMENTALES -->
+                <h3 class="text-xl font-bold mb-4 text-green-600 border-b pb-2 flex-center"><i class="ph ph-puzzle-piece-fill mr-2"></i> 3. Componentes Fundamentales de un Sistema 🧩</h3>
+                
+                <div class="space-y-6 mb-8">
+                    <!-- A. Central -->
+                    <div class="p-5 rounded-lg border-l-4 border-green-500 bg-green-50 shadow-md">
+                        <h4 class="font-bold text-lg text-green-700 flex-center mb-2"><i class="ph ph-cpu-fill mr-2"></i> Central de Alarmas (Unidad de Control) 🧠</h4>
+                        <p class="text-sm text-gray-700 mb-2">Es el <strong>núcleo</strong> que recibe, procesa y direcciona la información. Garantiza el <strong>funcionamiento ininterrumpido</strong> gracias a su <strong class="text-green-700">Batería de Apoyo</strong>.</p>
+                        <ul class="list-disc list-inside text-xs text-gray-600 pl-4 space-y-1">
+                            <li><strong>Función Principal:</strong> Procesar la señal del detector y compararla con la <strong>programación preestablecida</strong>.</li>
+                        </ul>
                     </div>
-                    <div class="info-card p-4 rounded-lg border border-yellow-500 bg-yellow-50 shadow-sm">
-                        <h4 class="font-bold text-xl text-yellow-700">Grado 2</h4>
-                        <p class="text-sm text-gray-700"><span class="font-semibold">Riesgo Bajo a Medio</span>. Residencias y pequeños comercios. Debe conectarse a <span class="font-semibold text-yellow-800">CRA</span> (Central Receptora de Alarmas).</p>
+                    
+                    <!-- B. Entradas -->
+                    <div class="p-5 rounded-lg border-l-4 border-blue-500 bg-blue-50 shadow-md">
+                        <h4 class="font-bold text-lg text-blue-700 flex-center mb-2"><i class="ph ph-eye-fill mr-2"></i> Entradas del Sistema (Detectores y Pulsadores) 👁️‍🗨️</h4>
+                        <p class="text-sm text-gray-700">Actúan como los <strong>"sentidos"</strong> del sistema. Miden variables físicas o detectan eventos. Trabajan a <strong>bajas tensiones (9, 12, 24, 48 Vcc)</strong>.</p>
                     </div>
-                    <div class="info-card p-4 rounded-lg border border-orange-500 bg-orange-50 shadow-sm">
-                        <h4 class="font-bold text-xl text-orange-700">Grado 3</h4>
-                        <p class="text-sm text-gray-700"><span class="font-semibold">Riesgo Alto</span>. Industrias, joyerías, bancos. Requisitos estrictos de <span class="font-semibold text-orange-800">doble vía de comunicación</span> y vigilancia.</p>
+
+                    <!-- C. Salidas -->
+                    <div class="p-5 rounded-lg border-l-4 border-orange-500 bg-orange-50 shadow-md">
+                        <h4 class="font-bold text-lg text-orange-700 flex-center mb-2"><i class="ph ph-megaphone-fill mr-2"></i> Salidas del Sistema (Actuadores) 📢</h4>
+                        <p class="text-sm text-gray-700 mb-2">Se encargan de <strong>ejecutar las acciones</strong> ordenadas por la central. Ejemplos:</p>
+                        <ul class="list-none text-sm text-gray-600 pl-4 space-y-1">
+                            <li class="flex-center"><i class="ph ph-siren-fill text-orange-600 mr-2"></i> Avisos Acústicos y Ópticos (<strong>Sirenas, luces estroboscópicas</strong>).</li>
+                            <li class="flex-center"><i class="ph ph-fire-extinguisher-fill text-red-600 mr-2"></i> Sistemas de Extinción (Rociadores o agentes extintores).</li>
+                            <li class="flex-center"><i class="ph ph-phone-call-fill text-blue-600 mr-2"></i> Comunicaciones (Transmisores para alarmas silenciosas o llamadas automáticas).</li>
+                        </ul>
                     </div>
-                    <div class="info-card p-4 rounded-lg border border-red-500 bg-red-50 shadow-sm">
-                        <h4 class="font-bold text-xl text-red-700">Grado 4</h4>
-                        <p class="text-sm text-gray-700"><span class="font-semibold">Riesgo Muy Alto</span>. Instalaciones militares, nucleares o infraestructuras críticas. Máxima seguridad y <span class="font-semibold text-red-800">equipos homologados</span>.</p>
+
+                    <!-- D. Gestión Externa -->
+                    <div class="p-5 rounded-lg border-l-4 border-teal-500 bg-teal-50 shadow-md">
+                        <h4 class="font-bold text-lg text-teal-700 flex-center mb-2"><i class="ph ph-user-circle-gear-fill mr-2"></i> Central Receptora de Alarmas (CRA) 📞</h4>
+                        <p class="text-sm text-gray-700">Servicio crucial operado por personal especializado **24/7** para recepción, **verificación** (vídeo/audio) y gestión de alarmas a distancia, antes de avisar a <strong class="text-teal-700">Fuerzas de Seguridad</strong>.</p>
                     </div>
                 </div>
 
-                <!-- COMPONENTES -->
-                <h3 class="text-xl font-bold mb-4 text-green-600 border-b pb-2">3. Componentes Fundamentales del Sistema</h3>
-                <div class="space-y-4 mb-8">
-                    <div class="info-card p-4 rounded-lg border-l-4 border-green-500 bg-green-50">
-                        <h4 class="font-bold text-lg text-green-700">Central de Alarmas (Unidad de Control)</h4>
-                        <p class="text-sm text-gray-700">Es el <span class="font-semibold">cerebro del sistema</span>. Recibe las señales de los detectores, las procesa según la programación y acciona los actuadores (sirenas, llamadas) o la comunicación con la CRA. Debe estar <span class="font-semibold">protegida contra sabotajes</span>.</p>
+                <!-- 4. MEDIOS DE COMUNICACIÓN -->
+                <h3 class="text-xl font-bold mb-4 text-indigo-600 border-b pb-2 flex-center"><i class="ph ph-link-fill mr-2"></i> 4. Medios de Comunicación entre Componentes 🔗</h3>
+                
+                <div class="overflow-x-auto rounded-lg shadow-md mb-8">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th class="w-2/12 bg-indigo-100">Tipo</th>
+                                <th class="w-3/12 bg-indigo-100">Medio Físico</th>
+                                <th class="w-4/12 bg-indigo-100">Ventajas (Lo Positivo)</th>
+                                <th class="w-3/12 bg-indigo-100">Inconvenientes y Riesgos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-semibold text-indigo-700 flex-center"><i class="ph ph-cable-car-fill text-lg mr-2"></i> Cableados</td>
+                                <td>Cable, Bus de datos, fibra óptica.</td>
+                                <td>Máxima <strong>fiabilidad y robustez</strong> frente a interferencias.</td>
+                                <td><strong>Instalación más costosa</strong>. Distancia limitada.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold text-indigo-700 flex-center"><i class="ph ph-antenna-fill text-lg mr-2"></i> Inalámbricos</td>
+                                <td>Infrarrojos, Radiofrecuencia (RF) encriptada.</td>
+                                <td><strong>No requiere cableado</strong>, montaje más fácil.</td>
+                                <td>Mayor posibilidad de <strong>interferencias externas (inhibidores)</strong>. Necesidad de <strong class="text-red-500">baterías</strong>.</td>
+                            </tr>
+                            <tr>
+                                <td class="font-semibold text-indigo-700 flex-center"><i class="ph ph-globe-hemisphere-east-fill text-lg mr-2"></i> Comunicación Remota</td>
+                                <td>Líneas telefónicas, móvil (GSM/4G/5G), Internet (IP).</td>
+                                <td>Esencial para transmitir información <strong>fuera del sistema local</strong> (a CRA, propietario).</td>
+                                <td>Depende de la <strong>infraestructura</strong> de comunicaciones estable.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 5. EJECUCIÓN Y MANTENIMIENTO -->
+                <h3 class="text-xl font-bold mb-4 text-pink-600 border-b pb-2 flex-center"><i class="ph ph-tools-fill mr-2"></i> 5. Ejecución, Mantenimiento y Documentación 🛠️</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Empresas Autorizadas -->
+                    <div class="p-4 rounded-lg border-l-4 border-pink-500 bg-pink-50 shadow-md">
+                        <h4 class="font-bold text-base text-pink-700 mb-1 flex-center"><i class="ph ph-certificate-fill text-lg mr-2"></i> Empresas Autorizadas ✅</h4>
+                        <ul class="list-disc list-inside text-xs text-gray-700 pl-2 space-y-1">
+                            <li>Instaladora/Mantenedora de <strong>Seguridad</strong>.</li>
+                            <li>Instaladora/Mantenedora de <strong>Protección Contra Incendios</strong>.</li>
+                            <li>Instaladora de <strong>Telecomunicaciones</strong> (ICT).</li>
+                        </ul>
                     </div>
-                    <div class="info-card p-4 rounded-lg border-l-4 border-green-500 bg-green-50">
-                        <h4 class="font-bold text-lg text-green-700">Detectores y Sensores</h4>
-                        <p class="text-sm text-gray-700">Elementos encargados de <span class="font-semibold">detectar la situación de riesgo</span>. Se clasifican por su principio de funcionamiento (volumétricos, magnéticos, sísmicos, etc.) y envían la señal a la Central.</p>
+                    <!-- Documentación Obligatoria -->
+                    <div class="p-4 rounded-lg border-l-4 border-pink-500 bg-pink-50 shadow-md">
+                        <h4 class="font-bold text-base text-pink-700 mb-1 flex-center"><i class="ph ph-book-open-text-fill text-lg mr-2"></i> Documentación Obligatoria 📜</h4>
+                        <ul class="list-disc list-inside text-xs text-gray-700 pl-2 space-y-1">
+                            <li>Certificado de <strong>Garantía</strong> y Homologación.</li>
+                            <li>Manuales de <strong>Obra</strong> y <strong>Mantenimiento</strong>.</li>
+                            <li><strong>Manual de Usuario</strong> (armar/desarmar).</li>
+                        </ul>
                     </div>
-                    <div class="info-card p-4 rounded-lg border-l-4 border-green-500 bg-green-50">
-                        <h4 class="font-bold text-lg text-green-700">Actuadores y Periféricos</h4>
-                        <p class="text-sm text-gray-700">Dispositivos que <span class="font-semibold">ejecutan la medida oportuna</span> (señalización). Incluyen <span class="font-semibold">sirenas, luces estroboscópicas</span>, sistemas de niebla o niebla de seguridad, y dispositivos de comunicación telefónica.</p>
-                    </div>
-                    <div class="info-card p-4 rounded-lg border-l-4 border-green-500 bg-green-50">
-                        <h4 class="font-bold text-lg text-green-700">Medios de Comunicación y Enlaces</h4>
-                        <p class="text-sm text-gray-700">Canales utilizados para <span class="font-semibold">transmitir la alarma</span> (RTB, GSM/GPRS, IP/Ethernet) entre la Central y la CRA o el usuario final. La fiabilidad de estos enlaces es clave para los Grados 3 y 4.</p>
+                     <!-- Instrumentos Necesarios -->
+                    <div class="p-4 rounded-lg border-l-4 border-pink-500 bg-pink-50 shadow-md">
+                        <h4 class="font-bold text-base text-pink-700 mb-1 flex-center"><i class="ph ph-test-tube-fill text-lg mr-2"></i> Instrumentos Esenciales 🔬</h4>
+                        <ul class="list-disc list-inside text-xs text-gray-700 pl-2 space-y-1">
+                            <li><strong>Multímetro</strong>, Medidor de tierra.</li>
+                            <li>Fusionadora de fibra óptica.</li>
+                            <li><strong>Pértiga de comprobación</strong> de detectores.</li>
+                            <li>Analizador/certificador para redes.</li>
+                        </ul>
                     </div>
                 </div>
+
+                <!-- Tipos de Mantenimiento (Gráfico y Listado) -->
+                <div class="p-5 rounded-lg border-l-4 border-pink-700 bg-pink-100 shadow-lg">
+                    <h4 class="font-bold text-lg text-pink-800 mb-3 flex-center"><i class="ph ph-recycle-fill mr-2"></i> Tipos de Mantenimiento (Fiabilidad del Sistema) ♻️</h4>
+                    <ul class="list-none grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-gray-700 p-0">
+                        <li class="flex-center">
+                            <i class="ph ph-wrench-fill text-red-600 mr-2 text-xl"></i>
+                            <div>
+                                <span class="font-bold text-pink-900">Correctivo:</span> Solucionar una avería <strong>ya detectada</strong>.
+                            </div>
+                        </li>
+                        <li class="flex-center">
+                            <i class="ph ph-calendar-check-fill text-green-600 mr-2 text-xl"></i>
+                            <div>
+                                <span class="font-bold text-pink-900">Preventivo:</span> <strong>Revisiones periódicas</strong> (limpieza, calibración). Es obligatorio.
+                            </div>
+                        </li>
+                        <li class="flex-center">
+                            <i class="ph ph-chart-line-up-fill text-blue-600 mr-2 text-xl"></i>
+                            <div>
+                                <span class="font-bold text-pink-900">Predictivo:</span> Usar programas para <strong>pronosticar</strong> la falla de un equipo.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
 
                 <!-- FEATURE GEMINI: EXPLICACIÓN AVANZADA (UT1) -->
                 <div class="llm-feature p-6 rounded-xl shadow-lg mt-10">
@@ -205,10 +391,10 @@
             </section>
 
 
-            <!-- SECCIÓN 2: UT9 - NORMATIVA Y PRL -->
+            <!-- SECCIÓN 2: UT9 - NORMATIVA Y PRL (Contenido Original, No Modificado) -->
             <section id="ut9-section" class="main-content-section">
                 <div class="text-center mb-8">
-                    <h2 class="text-2xl font-semibold mb-4 text-gray-700 border-b pb-2">UT9: Normativa y Seguridad Laboral en Instalaciones</h2>
+                    <h2 class="text-2xl font-semibold mb-4 text-gray-700 border-b pb-2 flex-center justify-center"><i class="ph ph-gavel-fill text-3xl mr-2 text-red-500"></i> UT9: Normativa y Seguridad Laboral en Instalaciones</h2>
                     <p class="max-w-4xl mx-auto text-gray-600">Marco legal, fases del proyecto y prevención de riesgos laborales esenciales.</p>
                 </div>
                 
@@ -223,22 +409,22 @@
 
                     <!-- SECCIÓN 2.1: MARCO LEGAL Y NORMATIVO -->
                     <section id="ut9-marco-legal-section" class="content-section active">
-                        <h3 class="text-xl font-bold mb-4 text-emerald-600 border-b pb-2">Normativas de Aplicación Específica</h3>
+                        <h3 class="text-xl font-bold mb-4 text-emerald-600 border-b pb-2 flex-center"><i class="ph ph-file-text-fill mr-2"></i> Normativas de Aplicación Específica</h3>
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                             <!-- Instalaciones Eléctricas -->
                             <div class="info-card bg-gray-50 p-5 rounded-lg border-l-4 border-yellow-500 shadow-md">
-                                <h4 class="text-lg font-bold mb-2 text-gray-800">Instalaciones Eléctricas (REBT)</h4>
+                                <h4 class="text-lg font-bold mb-2 text-gray-800 flex-center"><i class="ph ph-lightning-fill text-yellow-700 mr-2"></i> Instalaciones Eléctricas (REBT)</h4>
                                 <p class="text-sm text-gray-700 leading-relaxed">
-                                    Regulado por el <span class="font-semibold text-yellow-700">Reglamento Electrotécnico para Baja Tensión (REBT)</span>. Rige la ejecución y seguridad de las instalaciones eléctricas. Exige que los trabajos sean realizados por un <span class="font-semibold text-yellow-700">instalador autorizado</span>, quien debe emitir un <span class="font-semibold text-yellow-700">Certificado de Instalación</span> al finalizar.
+                                    Regulado por el <span class="font-semibold text-yellow-700">Reglamento Electrotécnico para Baja Tensión (REBT)</span>. Rige la ejecución y seguridad de las instalaciones. El <span class="font-semibold text-yellow-700">instalador autorizado</span> debe emitir un <span class="font-semibold text-yellow-700">Certificado de Instalación</span>.
                                 </p>
                             </div>
                             
                             <!-- Telecomunicaciones -->
                             <div class="info-card bg-gray-50 p-5 rounded-lg border-l-4 border-blue-500 shadow-md">
-                                <h4 class="text-lg font-bold mb-2 text-gray-800">Instalaciones de Telecomunicaciones (ICT)</h4>
+                                <h4 class="text-lg font-bold mb-2 text-gray-800 flex-center"><i class="ph ph-broadcast-fill text-blue-700 mr-2"></i> Instalaciones de Telecomunicaciones (ICT)</h4>
                                 <p class="text-sm text-gray-700 leading-relaxed">
-                                    Se rigen por el <span class="font-semibold text-blue-700">Reglamento de Infraestructuras Comunes de Telecomunicaciones (ICT)</span>. Define cómo deben ejecutarse los conductos, canalizaciones y las conexiones de los <span class="font-semibold text-blue-700">servicios de telecomunicación</span> necesarios para la alarma o el CCTV.
+                                    Se rigen por el <span class="font-semibold text-blue-700">Reglamento de Infraestructuras Comunes de Telecomunicaciones (ICT)</span>. Define cómo deben ejecutarse los conductos, canalizaciones y las conexiones de los <span class="font-semibold text-blue-700">servicios de telecomunicación</span>.
                                 </p>
                             </div>
                         </div>
@@ -272,45 +458,45 @@
                             </div>
                         </div>
 
-                        <h3 class="text-xl font-bold mt-8 mb-4 text-emerald-600 border-b pb-2">Contexto Legal y Normas UNE</h3>
+                        <h3 class="text-xl font-bold mt-8 mb-4 text-emerald-600 border-b pb-2 flex-center"><i class="ph ph-folder-notch-open-fill mr-2"></i> Contexto Legal y Normas UNE</h3>
                         <ul class="list-disc list-inside space-y-2 pl-4 text-sm text-gray-700">
-                            <li>La <span class="font-semibold text-gray-800">Constitución Española</span> reconoce el derecho a la seguridad y a la intimidad, marco superior para la videovigilancia.</li>
-                            <li>El <span class="font-semibold text-gray-800">Código Civil</span> y el <span class="font-semibold text-gray-800">Código Penal</span> regulan los daños y las conductas punibles relacionadas con las instalaciones.</li>
-                            <li>Las <span class="font-semibold text-gray-800">Normas UNE</span> (Una Norma Española) establecen los estándares de calidad, funcionamiento y <span class="font-semibold text-gray-800">compatibilidad electromagnética</span> de los equipos utilizados.</li>
+                            <li>La <span class="font-semibold text-gray-800">Constitución Española</span> reconoce el derecho a la seguridad y a la intimidad (marco superior).</li>
+                            <li>El <span class="font-semibold text-gray-800">Código Civil y Penal</span> regulan los daños y las conductas punibles.</li>
+                            <li>Las <span class="font-semibold text-gray-800">Normas UNE</span> establecen los estándares de calidad y <span class="font-semibold text-gray-800">compatibilidad electromagnética</span> de los equipos.</li>
                         </ul>
                     </section>
 
                     <!-- SECCIÓN 2.2: PROYECTO DE INSTALACIÓN -->
                     <section id="ut9-proyecto-section" class="content-section">
                         <div class="text-center mb-8">
-                            <h2 class="text-2xl font-semibold mb-4 text-gray-700">Fases y Contenido del Proyecto de Seguridad</h2>
+                            <h2 class="text-2xl font-semibold mb-4 text-gray-700 flex-center justify-center"><i class="ph ph-scroll-fill text-3xl mr-2 text-blue-500"></i> Fases y Contenido del Proyecto de Seguridad</h2>
                             <p class="max-w-4xl mx-auto text-gray-600">Un proyecto es el documento técnico que planifica, justifica y detalla la instalación.</p>
                         </div>
 
-                        <h3 class="text-xl font-bold mb-4 text-emerald-600 border-b pb-2">Fases de Desarrollo (Proceso Lógico Ampliado)</h3>
-                        <ol class="list-decimal list-inside space-y-3 pl-4 mb-8">
-                            <li><span class="font-bold">Estudio Previo y Viabilidad:</span> Evaluación de la necesidad, normativa aplicable y <span class="font-semibold">viabilidad económica</span> del proyecto.</li>
-                            <li><span class="font-bold">Recopilación de Datos:</span> Análisis de riesgos, características del inmueble y deseos del cliente.</li>
-                            <li><span class="font-bold">Diseño del Sistema:</span> Selección de equipos, ubicación de detectores, definición de zonas y <span class="font-semibold">grado de seguridad</span>.</li>
+                        <h3 class="text-xl font-bold mb-4 text-emerald-600 border-b pb-2 flex-center"><i class="ph ph-flow-chart-fill mr-2"></i> Fases de Desarrollo (Proceso Lógico)</h3>
+                        <ol class="list-decimal list-inside space-y-3 pl-4 mb-8 text-gray-700">
+                            <li><span class="font-bold">Estudio Previo y Viabilidad:</span> Evaluación de la necesidad y <span class="font-semibold text-green-700">viabilidad económica</span>.</li>
+                            <li><span class="font-bold">Recopilación de Datos:</span> Análisis de riesgos y características del inmueble.</li>
+                            <li><span class="font-bold">Diseño del Sistema:</span> Selección de equipos, ubicación y definición del <span class="font-semibold text-green-700">grado de seguridad</span>.</li>
                             <li><span class="font-bold">Cálculos y Presupuesto:</span> Dimensionamiento de la alimentación, cableado y costes.</li>
-                            <li><span class="font-bold">Elaboración de Documentación:</span> Redacción de <span class="font-semibold">memorias, planos</span> y pliegos de condiciones.</li>
-                            <li><span class="font-bold">Ejecución y Certificación:</span> Instalación física, pruebas y emisión del <span class="font-semibold">certificado final de seguridad</span>.</li>
+                            <li><span class="font-bold">Elaboración de Documentación:</span> Redacción de <span class="font-semibold text-green-700">memorias, planos</span> y pliegos de condiciones.</li>
+                            <li><span class="font-bold">Ejecución y Certificación:</span> Instalación, pruebas y emisión del <span class="font-semibold text-green-700">certificado final de seguridad</span>.</li>
                         </ol>
 
-                        <h3 class="text-xl font-bold mb-4 text-emerald-600 border-b pb-2">Componentes Clave del Proyecto</h3>
+                        <h3 class="text-xl font-bold mb-4 text-emerald-600 border-b pb-2 flex-center"><i class="ph ph-package-fill mr-2"></i> Componentes Clave del Proyecto</h3>
                         
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div class="info-card bg-blue-50 p-5 rounded-lg border-t-4 border-blue-600 shadow-md" onclick="showProjectDetail('memoria')">
-                                <h4 class="text-lg font-bold mb-2 text-gray-800">1. Memoria Descriptiva</h4>
-                                <p class="text-sm text-gray-600"><span class="font-semibold">Justificación técnica</span>, normativa aplicada y descripción de la solución de seguridad elegida.</p>
+                                <h4 class="text-lg font-bold mb-2 text-gray-800 flex-center"><i class="ph ph-pencil-simple-fill text-blue-600 mr-2"></i> 1. Memoria Descriptiva</h4>
+                                <p class="text-sm text-gray-600"><span class="font-semibold">Justificación técnica</span>, normativa aplicada y descripción de la solución.</p>
                             </div>
                             <div class="info-card bg-blue-50 p-5 rounded-lg border-t-4 border-blue-600 shadow-md" onclick="showProjectDetail('planos')">
-                                <h4 class="text-lg font-bold mb-2 text-gray-800">2. Planos y Esquemas</h4>
-                                <p class="text-sm text-gray-600"><span class="font-semibold">Representación gráfica</span> de la ubicación de los elementos, cableado y recorridos de los detectores.</p>
+                                <h4 class="text-lg font-bold mb-2 text-gray-800 flex-center"><i class="ph ph-map-pin-fill text-blue-600 mr-2"></i> 2. Planos y Esquemas</h4>
+                                <p class="text-sm text-gray-600"><span class="font-semibold">Representación gráfica</span> de la ubicación de elementos y cableado.</p>
                             </div>
                             <div class="info-card bg-blue-50 p-5 rounded-lg border-t-4 border-blue-600 shadow-md" onclick="showProjectDetail('pliego')">
-                                <h4 class="text-lg font-bold mb-2 text-gray-800">3. Pliego de Condiciones</h4>
-                                <p class="text-sm text-gray-600"><span class="font-semibold">Requisitos de calidad</span> de los materiales, especificaciones técnicas y procedimientos de prueba.</p>
+                                <h4 class="text-lg font-bold mb-2 text-gray-800 flex-center"><i class="ph ph-clipboard-text-fill text-blue-600 mr-2"></i> 3. Pliego de Condiciones</h4>
+                                <p class="text-sm text-gray-600"><span class="font-semibold">Requisitos de calidad</span> de los materiales y procedimientos de prueba.</p>
                             </div>
                         </div>
 
@@ -320,9 +506,9 @@
                         </div>
 
                         <div class="mt-8 p-5 bg-green-50 rounded-lg border-l-4 border-green-600 shadow-md">
-                            <h4 class="text-lg font-bold mb-2 text-green-700">Manual de Usuario</h4>
+                            <h4 class="text-lg font-bold mb-2 text-green-700 flex-center"><i class="ph ph-user-list-fill mr-2"></i> Manual de Usuario (Elemento Esencial)</h4>
                             <p class="text-sm text-gray-700 leading-relaxed">
-                                Documento esencial que se entrega al cliente. Debe contener la <span class="font-semibold text-green-700">descripción del funcionamiento</span>, instrucciones para <span class="font-semibold text-green-700">armar y desarmar</span>, procedimientos en caso de alarma y datos de contacto de la empresa instaladora para el <span class="font-semibold text-green-700">mantenimiento</span>.
+                                Documento que debe contener la <span class="font-semibold text-green-700">descripción del funcionamiento</span>, instrucciones para <span class="font-semibold text-green-700">armar y desarmar</span>, procedimientos en caso de alarma y datos de contacto para el mantenimiento.
                             </p>
                         </div>
                     </section>
@@ -330,59 +516,58 @@
                     <!-- SECCIÓN 2.3: SEGURIDAD Y PRL -->
                     <section id="ut9-riesgos-section" class="content-section">
                         <div class="text-center mb-8">
-                            <h2 class="text-2xl font-semibold mb-4 text-gray-700">Prevención de Riesgos Laborales (PRL)</h2>
+                            <h2 class="text-2xl font-semibold mb-4 text-gray-700 flex-center justify-center"><i class="ph ph-hard-hat-fill text-3xl mr-2 text-red-700"></i> Prevención de Riesgos Laborales (PRL)</h2>
                             <p class="max-w-4xl mx-auto text-gray-600">La PRL es crucial en montaje y mantenimiento. El empresario y el trabajador tienen obligaciones específicas.</p>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <!-- Obligaciones -->
                             <div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-600 shadow-md">
-                                <h3 class="text-xl font-bold mb-4 text-red-800">Obligaciones del Empresario</h3>
-                                <ul class="space-y-3 text-sm text-gray-700">
-                                    <li><span class="font-semibold text-red-700">Constituir el Servicio de Prevención:</span> Organizar los recursos.</li>
-                                    <li><span class="font-semibold text-red-700">Evaluar los riesgos:</span> Identificar todos los peligros.</li>
-                                    <li><span class="font-semibold text-red-700">Planificar la prevención:</span> Tomar medidas para reducir o eliminar los riesgos.</li>
-                                    <li><span class="font-semibold text-red-700">Vigilancia de la salud:</span> Garantizar la aptitud de los trabajadores.</li>
-                                    <li><span class="font-semibold text-red-700">Información y formación:</span> Capacitar a los empleados sobre los riesgos específicos.</li>
+                                <h3 class="text-xl font-bold mb-4 text-red-800 flex-center"><i class="ph ph-bank-fill mr-2"></i> Obligaciones del Empresario</h3>
+                                <ul class="space-y-3 text-sm text-gray-700 list-none p-0">
+                                    <li class="flex-center"><i class="ph ph-shield-warning-fill text-red-600 mr-2"></i> <span class="font-semibold text-red-700">Constituir el Servicio de Prevención</span>.</li>
+                                    <li class="flex-center"><i class="ph ph-clipboard-text-fill text-red-600 mr-2"></i> <span class="font-semibold text-red-700">Evaluar los riesgos</span>.</li>
+                                    <li class="flex-center"><i class="ph ph-ruler-fill text-red-600 mr-2"></i> <span class="font-semibold text-red-700">Planificar la prevención</span>.</li>
+                                    <li class="flex-center"><i class="ph ph-heartbeat-fill text-red-600 mr-2"></i> <span class="font-semibold text-red-700">Vigilancia de la salud</span>.</li>
+                                    <li class="flex-center"><i class="ph ph-chalkboard-teacher-fill text-red-600 mr-2"></i> <span class="font-semibold text-red-700">Información y formación</span>.</li>
                                 </ul>
                             </div>
 
                             <!-- Derechos y Obligaciones del Trabajador -->
                             <div class="bg-teal-50 p-6 rounded-lg border-l-4 border-teal-600 shadow-md">
-                                <h3 class="text-xl font-bold mb-4 text-teal-800">Derechos y Deberes del Trabajador</h3>
-                                <ul class="space-y-3 text-sm text-gray-700">
-                                    <li><span class="font-semibold text-teal-700">Derecho a la protección:</span> Recibir equipos de protección individual (EPIs).</li>
-                                    <li><span class="font-semibold text-teal-700">Deber de cumplir las normas:</span> Usar correctamente los EPIs.</li>
-                                    <li><span class="font-semibold text-teal-700">Informar de riesgos:</span> Comunicar de inmediato cualquier situación de peligro.</li>
-                                    <li><span class="font-semibold text-teal-700">Participación:</span> Colaborar con el servicio de prevención.</li>
+                                <h3 class="text-xl font-bold mb-4 text-teal-800 flex-center"><i class="ph ph-person-fill mr-2"></i> Derechos y Deberes del Trabajador</h3>
+                                <ul class="space-y-3 text-sm text-gray-700 list-none p-0">
+                                    <li class="flex-center"><i class="ph ph-hand-tap-fill text-teal-600 mr-2"></i> <span class="font-semibold text-teal-700">Derecho a la protección</span> (Recibir EPIs).</li>
+                                    <li class="flex-center"><i class="ph ph-check-circle-fill text-teal-600 mr-2"></i> <span class="font-semibold text-teal-700">Deber de cumplir las normas</span> (Usar correctamente los EPIs).</li>
+                                    <li class="flex-center"><i class="ph ph-warning-fill text-teal-600 mr-2"></i> <span class="font-semibold text-teal-700">Informar de riesgos</span>.</li>
+                                    <li class="flex-center"><i class="ph ph-users-three-fill text-teal-600 mr-2"></i> <span class="font-semibold text-teal-700">Participación</span>.</li>
                                 </ul>
                             </div>
                         </div>
 
                         <div class="mt-10">
-                            <h3 class="text-xl font-bold mb-4 text-gray-700 border-b pb-2">Riesgos Críticos y Medidas Preventivas</h3>
+                            <h3 class="text-xl font-bold mb-4 text-gray-700 border-b pb-2 flex-center"><i class="ph ph-flame-fill mr-2"></i> Riesgos Críticos y Medidas Preventivas</h3>
                             
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-orange-600">
-                                    <p class="font-semibold text-lg text-gray-800">Riesgo Eléctrico</p>
-                                    <p class="text-sm text-gray-500 mt-1">Peligro por <span class="font-semibold text-orange-700">contacto con tensión</span>. Prevención: Uso de <span class="font-semibold text-orange-700">EPIs aislantes</span> y aplicación de las <span class="font-semibold text-orange-700">cinco reglas de oro</span>.</p>
+                                    <p class="font-semibold text-lg text-gray-800 flex-center"><i class="ph ph-electric-current-fill text-orange-600 mr-2"></i> Riesgo Eléctrico</p>
+                                    <p class="text-sm text-gray-500 mt-1">Peligro por <span class="font-semibold text-orange-700">contacto con tensión</span>. Prevención: Uso de <span class="font-semibold text-orange-700">EPIs aislantes</span> y las <span class="font-semibold text-orange-700">cinco reglas de oro</span>.</p>
                                 </div>
                                 <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-orange-600">
-                                    <p class="font-semibold text-lg text-gray-800">Caída en Altura</p>
-                                    <p class="text-sm text-gray-500 mt-1">Riesgo al usar <span class="font-semibold text-orange-700">escaleras, andamios</span> o tejados. Prevención: Uso de <span class="font-semibold text-orange-700">arnés de seguridad</span> anclado y <span class="font-semibold text-orange-700">inspección</span> de equipos de acceso.</p>
+                                    <p class="font-semibold text-lg text-gray-800 flex-center"><i class="ph ph-stairs-fill text-orange-600 mr-2"></i> Caída en Altura</p>
+                                    <p class="text-sm text-gray-500 mt-1">Riesgo al usar <span class="font-semibold text-orange-700">escaleras, andamios</span>. Prevención: Uso de <span class="font-semibold text-orange-700">arnés de seguridad</span> anclado e <span class="font-semibold text-orange-700">inspección</span> de equipos de acceso.</p>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="mt-10 p-5 bg-gray-100 rounded-lg shadow-inner">
-                            <h3 class="text-xl font-bold mb-3 text-gray-700">Gestión de Residuos (Medio Ambiente)</h3>
+                            <h3 class="text-xl font-bold mb-3 text-gray-700 flex-center"><i class="ph ph-trash-fill mr-2"></i> Gestión de Residuos (Medio Ambiente)</h3>
                             <p class="text-sm text-gray-600 leading-relaxed mb-3">
-                                La correcta gestión es obligatoria (<span class="font-semibold">Ley 10/1998</span>). Los residuos generados en instalación y mantenimiento se clasifican en:
+                                La gestión es obligatoria (<span class="font-semibold">Ley 10/1998</span>).
                             </p>
-                            <ul class="list-disc list-inside space-y-1 pl-4 text-sm text-gray-700">
-                                <li><span class="font-semibold text-gray-800">Residuos de Instalación:</span> Escombros, tierras, y embalajes. Deben ir a <span class="font-semibold text-gray-800">contenedores específicos</span>.</li>
-                                <li><span class="font-semibold text-gray-800">Residuos de Mantenimiento:</span> Cables, papel, cartón (sin componentes peligrosos).</li>
-                                <li><span class="font-semibold text-gray-800">RAEE:</span> Residuos de Aparatos Eléctricos y Electrónicos (ej. baterías, placas). Regulados por <span class="font-semibold text-gray-800">RD 208/2005</span>. Deben ser gestionados por <span class="font-semibold text-gray-800">gestores autorizados</span>.</li>
+                            <ul class="list-none space-y-2 pl-0 text-sm text-gray-700">
+                                <li class="flex-center"><i class="ph ph-package-fill text-gray-600 mr-2"></i> <span class="font-semibold text-gray-800">Residuos de Instalación:</span> Escombros y embalajes a <strong class="text-gray-800">contenedores específicos</strong>.</li>
+                                <li class="flex-center"><i class="ph ph-battery-charging-fill text-gray-600 mr-2"></i> <span class="font-semibold text-gray-800">RAEE:</span> Residuos de Aparatos Eléctricos y Electrónicos (baterías, placas). Regulados por <strong class="text-gray-800">RD 208/2005</strong>. Se entregan a <strong class="text-gray-800">gestores autorizados</strong>.</li>
                             </ul>
                         </div>
                     </section>
@@ -501,7 +686,7 @@
         let listItems = htmlText.match(/^- (.*)$/gm);
         if (listItems) {
             // Reemplaza los guiones de lista con <li> y envuelve en <ul>
-            htmlText = '<ul>' + listItems.map(item => `<li>${item.substring(2)}</li>`).join('') + '</ul>';
+            htmlText = '<ul>' + listItems.map(item => `<li><i class="ph ph-dot-fill text-lg mr-1 inline-block align-middle"></i>${item.substring(2)}</li>`).join('') + '</ul>';
         } else {
             // Si no hay listas, convertir saltos de línea a <br>
              htmlText = htmlText.replace(/(\r\n|\n|\r)/g, '<br>');
@@ -657,15 +842,15 @@
     // Datos para el detalle interactivo del proyecto (UT9)
     const projectData = {
         memoria: {
-            title: "Memoria Descriptiva (Detalle Ampliado)",
+            title: "Memoria Descriptiva (Detalle Ampliado) 📝",
             description: "Justifica la elección del sistema, describe el entorno a proteger, el <span class=\"font-semibold text-blue-800\">grado de seguridad</span> aplicado, y los <span class=\"font-semibold text-blue-800\">cálculos técnicos</span> que respaldan el diseño (como cálculo de <span class=\"font-semibold text-blue-800\">caída de tensión</span> y dimensionamiento de baterías de reserva)."
         },
         planos: {
-            title: "Planos y Esquemas (Detalle Ampliado)",
+            title: "Planos y Esquemas (Detalle Ampliado) 🗺️",
             description: "Incluye el <span class=\"font-semibold text-blue-800\">plano de situación</span> (localización del inmueble), <span class=\"font-semibold text-blue-800\">planos de emplazamiento</span> (ubicación de cámaras, detectores, central), los <span class=\"font-semibold text-blue-800\">esquemas unifilares</span> de las conexiones y el detalle constructivo de las <span class=\"font-semibold text-blue-800\">canalizaciones</span>."
         },
         pliego: {
-            title: "Pliego de Condiciones",
+            title: "Pliego de Condiciones (Reglas y Calidad) 📑",
             description: "Detalla las <span class=\"font-semibold text-blue-800\">características mínimas</span> que deben cumplir los materiales (homologaciones), la forma en que se deben realizar las <span class=\"font-semibold text-blue-800\">pruebas de funcionamiento</span> y la garantía exigida por la normativa al instalador."
         }
     };
