@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía M2T: Sistemas de Seguridad Electrónica (UT1 y UT9)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Iconos Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web@2.1.1/dist/umd/phosphor-icons.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7f9;
+        }
+        
+        /* Estilos de Pestaña Principal */
+        .main-nav-link {
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            color: #4b5563;
+        }
+        .main-nav-link.active {
+            border-bottom-color: #10b981; /* Esmeralda */
+            color: #10b981;
+            font-weight: 600;
+            background-color: #ecfdf5;
+        }
+        .main-content-section {
+            display: none;
+        }
+        .main-content-section.active {
+            display: block;
+        }
+
+        /* Estilos de Pestaña Secundaria (UT9) */
+        .sub-nav-link {
+            transition: color 0.2s, background-color 0.2s;
+            border-radius: 9999px; /* Pill shape */
+            padding: 8px 16px;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            color: #4b5563;
+        }
+        .sub-nav-link.active {
+            background-color: #34d399; /* Emerald 400 */
+            color: #064e3b; /* Emerald 900 */
+            font-weight: 600;
+        }
+        
+        .info-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+        .info-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        .llm-feature {
+            background-color: #fff7ed; /* Orange 50 */
+            border: 2px solid #fdba74; /* Orange 300 */
+        }
+        .llm-title {
+            color: #ea580c; /* Orange 600 */
+        }
+
+        /* Nuevo estilo para Markdown */
+        .markdown-content {
+            white-space: pre-wrap; /* Mantiene saltos de línea y espacios */
+        }
+        .markdown-content ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .markdown-content li {
+            margin-bottom: 0.25rem;
+        }
+        
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- CONTENIDO PRINCIPAL (ACCESO DIRECTO) -->
+    <div id="main-content" class="w-full max-w-6xl mx-auto p-4 md:p-8">
+        <header class="text-center mb-10 bg-white p-6 rounded-xl shadow-lg">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Guía M2T: Sistemas de Seguridad Electrónica</h1>
+            <p class="mt-2 text-lg text-gray-600">Documentación de las Unidades Temáticas 1 y 9.</p>
+        </header>
+
+        <!-- NAVEGACIÓN PRINCIPAL (UT1 vs UT9) -->
+        <nav class="flex justify-center border-b border-gray-300 mb-8 overflow-x-auto whitespace-nowrap bg-white rounded-t-xl shadow-inner">
+            <button class="main-nav-link py-4 px-4 sm:px-6 text-base sm:text-lg active" data-target="ut1">UT1: Introducción y Componentes</button>
+            <button class="main-nav-link py-4 px-4 sm:px-6 text-base sm:text-lg" data-target="ut9">UT9: Normativa y PRL</button>
+        </nav>
+
+        <main class="bg-white p-6 md:p-10 rounded-b-xl shadow-lg">
+            
+            <!-- SECCIÓN 1: UT1 - INTRODUCCIÓN Y COMPONENTES -->
+            <section id="ut1-section" class="main-content-section active">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-semibold mb-4 text-gray-700 border-b pb-2">UT1: Introducción a los Sistemas de Seguridad Electrónica</h2>
+                    <p class="max-w-4xl mx-auto text-gray-600">Fundamentos, clasificaciones y elementos clave para la protección de personas y bienes.</p>
+                </div>
+
+                <!-- CLASIFICACIÓN -->
+                <h3 class="text-xl font-bold mb-4 text-blue-600 border-b pb-2">1. Clasificación de Sistemas de Seguridad</h3>
+                <p class="text-gray-700 mb-4">Un sistema de seguridad electrónica es un conjunto de equipos para garantizar la protección frente a agresiones externas. Varían según las <span class="font-bold">necesidades del usuario</span>, las <span class="font-bold">características del recinto</span> y el <span class="font-bold">presupuesto</span>.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                    <div class="info-card p-4 rounded-lg border-l-4 border-indigo-500 bg-indigo-50">
+                        <h4 class="font-bold text-lg text-indigo-700">Según Obligatoriedad</h4>
+                        <ul class="list-disc list-inside text-sm text-gray-700 pl-2">
+                            <li><span class="font-semibold">Obligatoria:</span> Exigida por ley (ej. bancos, joyerías, hospitales).</li>
+                            <li><span class="font-semibold">Opcional:</span> Decisión del propietario (ej. vivienda particular, pequeño negocio).</li>
+                        </ul>
+                    </div>
+                    <div class="info-card p-4 rounded-lg border-l-4 border-purple-500 bg-purple-50">
+                        <h4 class="font-bold text-lg text-purple-700">Según Tipo de Amenaza</h4>
+                        <ul class="list-disc list-inside text-sm text-gray-700 pl-2">
+                            <li><span class="font-semibold">Sistemas Antirrobo</span> e Intrusión.</li>
+                            <li><span class="font-semibold">Circuito Cerrado de Televisión</span> (CCTV).</li>
+                            <li><span class="font-semibold">Detección de Incendio</span> y Gas.</li>
+                            <li><span class="font-semibold">Control de Accesos</span> (Biométricos, Tarjetas).</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- GRADOS DE SEGURIDAD -->
+                <h3 class="text-xl font-bold mb-4 text-red-600 border-b pb-2">2. Grados de Seguridad (UNE-EN 50131)</h3>
+                <p class="text-gray-700 mb-4">Los grados definen el nivel de riesgo y los requisitos mínimos de instalación y funcionamiento del sistema, siendo el Grado 4 el más exigente.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                    <div class="info-card p-4 rounded-lg border border-gray-300 bg-white shadow-sm">
+                        <h4 class="font-bold text-xl text-gray-700">Grado 1</h4>
+                        <p class="text-sm text-gray-500"><span class="font-semibold">Riesgo Bajo</span>. No requiere conexión a CRA. Uso doméstico sin alto valor.</p>
+                    </div>
+                    <div class="info-card p-4 rounded-lg border border-yellow-500 bg-yellow-50 shadow-sm">
+                        <h4 class="font-bold text-xl text-yellow-700">Grado 2</h4>
+                        <p class="text-sm text-gray-700"><span class="font-semibold">Riesgo Bajo a Medio</span>. Residencias y pequeños comercios. Debe conectarse a <span class="font-semibold text-yellow-800">CRA</span> (Central Receptora de Alarmas).</p>
+                    </div>
+                    <div class="info-card p-4 rounded-lg border border-orange-500 bg-orange-50 shadow-sm">
+                        <h4 class="font-bold text-xl text-orange-700">Grado 3</h4>
+                        <p class="text-sm text-gray-700"><span class="font-semibold">Riesgo Alto</span>. Industrias, joyerías, bancos. Requisitos estrictos de <span class="font-semibold text-orange-800">doble vía de comunicación</span> y vigilancia.</p>
+                    </div>
+                    <div class="info-card p-4 rounded-lg border border-red-500 bg-red-50 shadow-sm">
+                        <h4 class="font-bold text-xl text-red-700">Grado 4</h4>
+                        <p class="text-sm text-gray-700"><span class="font-semibold">Riesgo Muy Alto</span>. Instalaciones militares, nucleares o infraestructuras críticas. Máxima seguridad y <span class="font-semibold text-red-800">equipos homologados</span>.</p>
+                    </div>
+                </div>
+
+                <!-- COMPONENTES -->
+                <h3 class="text-xl font-bold mb-4 text-green-600 border-b pb-2">3. Componentes Fundamentales del Sistema</h3>
+                <div class="space-y-4 mb-8">
+                    <div class="info-card p-4 rounded-lg border-l-4 border-green-500 bg-green-50">
+                        <h4 class="font-bold text-lg text-green-700">Central de Alarmas (Unidad de Control)</h4>
+                        <p class="text-sm text-gray-700">Es el <span class="font-semibold">cerebro del sistema</span>. Recibe las señales de los detectores, las procesa según la programación y acciona los actuadores (sirenas, llamadas) o la comunicación con la CRA. Debe estar <span class="font-semibold">protegida contra sabotajes</span>.</p>
+                    </div>
+                    <div class="info-card p-4 rounded-lg border-l-4 border-green-500 bg-green-50">
+                        <h4 class="font-bold text-lg text-green-700">Detectores y Sensores</h4>
+                        <p class="text-sm text-gray-700">Elementos encargados de <span class="font-semibold">detectar la situación de riesgo</span>. Se clasifican por su principio de funcionamiento (volumétricos, magnéticos, sísmicos, etc.) y envían la señal a la Central.</p>
+                    </div>
+                    <div class="info-card p-4 rounded-lg border-l-4 border-green-500 bg-green-50">
+                        <h4 class="font-bold text-lg text-green-700">Actuadores y Periféricos</h4>
+                        <p class="text-sm text-gray-700">Dispositivos que <span class="font-semibold">ejecutan la medida oportuna</span> (señalización). Incluyen <span class="font-semibold">sirenas, luces estroboscópicas</span>, sistemas de niebla o niebla de seguridad, y dispositivos de comunicación telefónica.</p>
+                    </div>
+                    <div class="info-card p-4 rounded-lg border-l-4 border-green-500 bg-green-50">
+                        <h4 class="font-bold text-lg text-green-700">Medios de Comunicación y Enlaces</h4>
+                        <p class="text-sm text-gray-700">Canales utilizados para <span class="font-semibold">transmitir la alarma</span> (RTB, GSM/GPRS, IP/Ethernet) entre la Central y la CRA o el usuario final. La fiabilidad de estos enlaces es clave para los Grados 3 y 4.</p>
+                    </div>
+                </div>
+
+                <!-- FEATURE GEMINI: EXPLICACIÓN AVANZADA (UT1) -->
+                <div class="llm-feature p-6 rounded-xl shadow-lg mt-10">
+                    <h3 class="text-2xl font-bold mb-4 llm-title flex items-center">
+                        <i class="ph-fill ph-sparkle text-3xl mr-2"></i> Explicación Avanzada de Conceptos UT1
+                    </h3>
+                    <p class="text-gray-700 mb-4">Introduce cualquier término relacionado con la UT1 (ej. "Detector Magnético", "Doble Vía de Comunicación", "Grado 4") para obtener una explicación concisa de experto.</p>
+                    
+                    <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3 mb-4">
+                        <input type="text" id="explanation-input" placeholder="Escribe el concepto a profundizar..." class="flex-grow p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" value="Grado 3" />
+                        <button id="generate-explanation-btn" class="bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-200 flex items-center justify-center">
+                            Generar Explicación
+                        </button>
+                    </div>
+
+                    <div id="explanation-result" class="mt-4 p-4 min-h-[50px] bg-white rounded-lg shadow-inner border border-orange-200 text-gray-700 markdown-content">
+                        <p class="text-gray-500">La explicación generada aparecerá aquí.</p>
+                    </div>
+                    <div id="explanation-loader" class="hidden text-center mt-4">
+                        <div class="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-orange-500 rounded-full" role="status"></div>
+                        <span class="ml-2 text-orange-500 font-medium">Generando explicación...</span>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- SECCIÓN 2: UT9 - NORMATIVA Y PRL -->
+            <section id="ut9-section" class="main-content-section">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-semibold mb-4 text-gray-700 border-b pb-2">UT9: Normativa y Seguridad Laboral en Instalaciones</h2>
+                    <p class="max-w-4xl mx-auto text-gray-600">Marco legal, fases del proyecto y prevención de riesgos laborales esenciales.</p>
+                </div>
+                
+                <!-- NAVEGACIÓN SECUNDARIA DE UT9 -->
+                <nav class="flex justify-center space-x-2 md:space-x-4 mb-8 bg-gray-100 p-3 rounded-xl shadow-inner">
+                    <button class="sub-nav-link active" data-target="ut9-marco-legal">Marco Legal</button>
+                    <button class="sub-nav-link" data-target="ut9-proyecto">Proyecto de Instalación</button>
+                    <button class="sub-nav-link" data-target="ut9-riesgos">Seguridad y PRL</button>
+                </nav>
+
+                <div id="ut9-content-container">
+
+                    <!-- SECCIÓN 2.1: MARCO LEGAL Y NORMATIVO -->
+                    <section id="ut9-marco-legal-section" class="content-section active">
+                        <h3 class="text-xl font-bold mb-4 text-emerald-600 border-b pb-2">Normativas de Aplicación Específica</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            <!-- Instalaciones Eléctricas -->
+                            <div class="info-card bg-gray-50 p-5 rounded-lg border-l-4 border-yellow-500 shadow-md">
+                                <h4 class="text-lg font-bold mb-2 text-gray-800">Instalaciones Eléctricas (REBT)</h4>
+                                <p class="text-sm text-gray-700 leading-relaxed">
+                                    Regulado por el <span class="font-semibold text-yellow-700">Reglamento Electrotécnico para Baja Tensión (REBT)</span>. Rige la ejecución y seguridad de las instalaciones eléctricas. Exige que los trabajos sean realizados por un <span class="font-semibold text-yellow-700">instalador autorizado</span>, quien debe emitir un <span class="font-semibold text-yellow-700">Certificado de Instalación</span> al finalizar.
+                                </p>
+                            </div>
+                            
+                            <!-- Telecomunicaciones -->
+                            <div class="info-card bg-gray-50 p-5 rounded-lg border-l-4 border-blue-500 shadow-md">
+                                <h4 class="text-lg font-bold mb-2 text-gray-800">Instalaciones de Telecomunicaciones (ICT)</h4>
+                                <p class="text-sm text-gray-700 leading-relaxed">
+                                    Se rigen por el <span class="font-semibold text-blue-700">Reglamento de Infraestructuras Comunes de Telecomunicaciones (ICT)</span>. Define cómo deben ejecutarse los conductos, canalizaciones y las conexiones de los <span class="font-semibold text-blue-700">servicios de telecomunicación</span> necesarios para la alarma o el CCTV.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- FEATURE GEMINI: ASESOR NORMATIVO (UT9) -->
+                        <div class="llm-feature p-6 rounded-xl shadow-lg mt-10">
+                            <h3 class="text-2xl font-bold mb-4 llm-title flex items-center">
+                                <i class="ph-fill ph-sparkle text-3xl mr-2"></i> Asesor de Normativa y PRL (Búsqueda Web)
+                            </h3>
+                            <p class="text-gray-700 mb-4">¿Preguntas sobre una ley, un Real Decreto específico o una medida de PRL para un trabajo concreto? Pregunta aquí para obtener una respuesta fundamentada con información web en tiempo real.</p>
+                            
+                            <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3 mb-4">
+                                <input type="text" id="regulation-input" placeholder="Ej. ¿Qué exige el REBT para la toma de tierra de una Central?" class="flex-grow p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" value="¿Qué exige la Ley de Seguridad Privada para los sistemas de Grado 4?" />
+                                <button id="generate-regulation-btn" class="bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-200 flex items-center justify-center">
+                                    Consultar Normativa
+                                </button>
+                            </div>
+        
+                            <div id="regulation-result" class="mt-4 p-4 min-h-[50px] bg-white rounded-lg shadow-inner border border-orange-200 text-gray-700 markdown-content">
+                                <p class="text-gray-500">La respuesta y sus fuentes aparecerán aquí.</p>
+                            </div>
+                            <div id="regulation-loader" class="hidden text-center mt-4">
+                                <div class="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-orange-500 rounded-full" role="status"></div>
+                                <span class="ml-2 text-orange-500 font-medium">Consultando fuentes legales...</span>
+                            </div>
+                        </div>
+
+                        <h3 class="text-xl font-bold mt-8 mb-4 text-emerald-600 border-b pb-2">Contexto Legal y Normas UNE</h3>
+                        <ul class="list-disc list-inside space-y-2 pl-4 text-sm text-gray-700">
+                            <li>La <span class="font-semibold text-gray-800">Constitución Española</span> reconoce el derecho a la seguridad y a la intimidad, marco superior para la videovigilancia.</li>
+                            <li>El <span class="font-semibold text-gray-800">Código Civil</span> y el <span class="font-semibold text-gray-800">Código Penal</span> regulan los daños y las conductas punibles relacionadas con las instalaciones.</li>
+                            <li>Las <span class="font-semibold text-gray-800">Normas UNE</span> (Una Norma Española) establecen los estándares de calidad, funcionamiento y <span class="font-semibold text-gray-800">compatibilidad electromagnética</span> de los equipos utilizados.</li>
+                        </ul>
+                    </section>
+
+                    <!-- SECCIÓN 2.2: PROYECTO DE INSTALACIÓN -->
+                    <section id="ut9-proyecto-section" class="content-section">
+                        <div class="text-center mb-8">
+                            <h2 class="text-2xl font-semibold mb-4 text-gray-700">Fases y Contenido del Proyecto de Seguridad</h2>
+                            <p class="max-w-4xl mx-auto text-gray-600">Un proyecto es el documento técnico que planifica, justifica y detalla la instalación.</p>
+                        </div>
+
+                        <h3 class="text-xl font-bold mb-4 text-emerald-600 border-b pb-2">Fases de Desarrollo (Proceso Lógico Ampliado)</h3>
+                        <ol class="list-decimal list-inside space-y-3 pl-4 mb-8">
+                            <li><span class="font-bold">Estudio Previo y Viabilidad:</span> Evaluación de la necesidad, normativa aplicable y <span class="font-semibold">viabilidad económica</span> del proyecto.</li>
+                            <li><span class="font-bold">Recopilación de Datos:</span> Análisis de riesgos, características del inmueble y deseos del cliente.</li>
+                            <li><span class="font-bold">Diseño del Sistema:</span> Selección de equipos, ubicación de detectores, definición de zonas y <span class="font-semibold">grado de seguridad</span>.</li>
+                            <li><span class="font-bold">Cálculos y Presupuesto:</span> Dimensionamiento de la alimentación, cableado y costes.</li>
+                            <li><span class="font-bold">Elaboración de Documentación:</span> Redacción de <span class="font-semibold">memorias, planos</span> y pliegos de condiciones.</li>
+                            <li><span class="font-bold">Ejecución y Certificación:</span> Instalación física, pruebas y emisión del <span class="font-semibold">certificado final de seguridad</span>.</li>
+                        </ol>
+
+                        <h3 class="text-xl font-bold mb-4 text-emerald-600 border-b pb-2">Componentes Clave del Proyecto</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="info-card bg-blue-50 p-5 rounded-lg border-t-4 border-blue-600 shadow-md" onclick="showProjectDetail('memoria')">
+                                <h4 class="text-lg font-bold mb-2 text-gray-800">1. Memoria Descriptiva</h4>
+                                <p class="text-sm text-gray-600"><span class="font-semibold">Justificación técnica</span>, normativa aplicada y descripción de la solución de seguridad elegida.</p>
+                            </div>
+                            <div class="info-card bg-blue-50 p-5 rounded-lg border-t-4 border-blue-600 shadow-md" onclick="showProjectDetail('planos')">
+                                <h4 class="text-lg font-bold mb-2 text-gray-800">2. Planos y Esquemas</h4>
+                                <p class="text-sm text-gray-600"><span class="font-semibold">Representación gráfica</span> de la ubicación de los elementos, cableado y recorridos de los detectores.</p>
+                            </div>
+                            <div class="info-card bg-blue-50 p-5 rounded-lg border-t-4 border-blue-600 shadow-md" onclick="showProjectDetail('pliego')">
+                                <h4 class="text-lg font-bold mb-2 text-gray-800">3. Pliego de Condiciones</h4>
+                                <p class="text-sm text-gray-600"><span class="font-semibold">Requisitos de calidad</span> de los materiales, especificaciones técnicas y procedimientos de prueba.</p>
+                            </div>
+                        </div>
+
+                        <!-- Panel de Detalle del Proyecto -->
+                        <div id="project-detail" class="mt-8 p-6 bg-yellow-50 rounded-lg shadow-inner min-h-[150px] flex items-center justify-center border-l-4 border-yellow-400">
+                            <p class="text-gray-500 text-lg">Haga clic en un componente del proyecto para ver su descripción extendida.</p>
+                        </div>
+
+                        <div class="mt-8 p-5 bg-green-50 rounded-lg border-l-4 border-green-600 shadow-md">
+                            <h4 class="text-lg font-bold mb-2 text-green-700">Manual de Usuario</h4>
+                            <p class="text-sm text-gray-700 leading-relaxed">
+                                Documento esencial que se entrega al cliente. Debe contener la <span class="font-semibold text-green-700">descripción del funcionamiento</span>, instrucciones para <span class="font-semibold text-green-700">armar y desarmar</span>, procedimientos en caso de alarma y datos de contacto de la empresa instaladora para el <span class="font-semibold text-green-700">mantenimiento</span>.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- SECCIÓN 2.3: SEGURIDAD Y PRL -->
+                    <section id="ut9-riesgos-section" class="content-section">
+                        <div class="text-center mb-8">
+                            <h2 class="text-2xl font-semibold mb-4 text-gray-700">Prevención de Riesgos Laborales (PRL)</h2>
+                            <p class="max-w-4xl mx-auto text-gray-600">La PRL es crucial en montaje y mantenimiento. El empresario y el trabajador tienen obligaciones específicas.</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <!-- Obligaciones -->
+                            <div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-600 shadow-md">
+                                <h3 class="text-xl font-bold mb-4 text-red-800">Obligaciones del Empresario</h3>
+                                <ul class="space-y-3 text-sm text-gray-700">
+                                    <li><span class="font-semibold text-red-700">Constituir el Servicio de Prevención:</span> Organizar los recursos.</li>
+                                    <li><span class="font-semibold text-red-700">Evaluar los riesgos:</span> Identificar todos los peligros.</li>
+                                    <li><span class="font-semibold text-red-700">Planificar la prevención:</span> Tomar medidas para reducir o eliminar los riesgos.</li>
+                                    <li><span class="font-semibold text-red-700">Vigilancia de la salud:</span> Garantizar la aptitud de los trabajadores.</li>
+                                    <li><span class="font-semibold text-red-700">Información y formación:</span> Capacitar a los empleados sobre los riesgos específicos.</li>
+                                </ul>
+                            </div>
+
+                            <!-- Derechos y Obligaciones del Trabajador -->
+                            <div class="bg-teal-50 p-6 rounded-lg border-l-4 border-teal-600 shadow-md">
+                                <h3 class="text-xl font-bold mb-4 text-teal-800">Derechos y Deberes del Trabajador</h3>
+                                <ul class="space-y-3 text-sm text-gray-700">
+                                    <li><span class="font-semibold text-teal-700">Derecho a la protección:</span> Recibir equipos de protección individual (EPIs).</li>
+                                    <li><span class="font-semibold text-teal-700">Deber de cumplir las normas:</span> Usar correctamente los EPIs.</li>
+                                    <li><span class="font-semibold text-teal-700">Informar de riesgos:</span> Comunicar de inmediato cualquier situación de peligro.</li>
+                                    <li><span class="font-semibold text-teal-700">Participación:</span> Colaborar con el servicio de prevención.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="mt-10">
+                            <h3 class="text-xl font-bold mb-4 text-gray-700 border-b pb-2">Riesgos Críticos y Medidas Preventivas</h3>
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-orange-600">
+                                    <p class="font-semibold text-lg text-gray-800">Riesgo Eléctrico</p>
+                                    <p class="text-sm text-gray-500 mt-1">Peligro por <span class="font-semibold text-orange-700">contacto con tensión</span>. Prevención: Uso de <span class="font-semibold text-orange-700">EPIs aislantes</span> y aplicación de las <span class="font-semibold text-orange-700">cinco reglas de oro</span>.</p>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-orange-600">
+                                    <p class="font-semibold text-lg text-gray-800">Caída en Altura</p>
+                                    <p class="text-sm text-gray-500 mt-1">Riesgo al usar <span class="font-semibold text-orange-700">escaleras, andamios</span> o tejados. Prevención: Uso de <span class="font-semibold text-orange-700">arnés de seguridad</span> anclado y <span class="font-semibold text-orange-700">inspección</span> de equipos de acceso.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-10 p-5 bg-gray-100 rounded-lg shadow-inner">
+                            <h3 class="text-xl font-bold mb-3 text-gray-700">Gestión de Residuos (Medio Ambiente)</h3>
+                            <p class="text-sm text-gray-600 leading-relaxed mb-3">
+                                La correcta gestión es obligatoria (<span class="font-semibold">Ley 10/1998</span>). Los residuos generados en instalación y mantenimiento se clasifican en:
+                            </p>
+                            <ul class="list-disc list-inside space-y-1 pl-4 text-sm text-gray-700">
+                                <li><span class="font-semibold text-gray-800">Residuos de Instalación:</span> Escombros, tierras, y embalajes. Deben ir a <span class="font-semibold text-gray-800">contenedores específicos</span>.</li>
+                                <li><span class="font-semibold text-gray-800">Residuos de Mantenimiento:</span> Cables, papel, cartón (sin componentes peligrosos).</li>
+                                <li><span class="font-semibold text-gray-800">RAEE:</span> Residuos de Aparatos Eléctricos y Electrónicos (ej. baterías, placas). Regulados por <span class="font-semibold text-gray-800">RD 208/2005</span>. Deben ser gestionados por <span class="font-semibold text-gray-800">gestores autorizados</span>.</li>
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+
+            </section>
+        </main>
+
+        <footer class="mt-12 text-center text-sm text-gray-400">
+            <p>&copy; Proyecto de documentación M2T. Acceso abierto.</p>
+        </footer>
+    </div>
+
+<script>
+    
+    // --- CONFIGURACIÓN Y FUNCIONES BASE DEL API GEMINI ---
+    const API_URL_GEMINI = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=';
+    const API_KEY = ""; // Será inyectada por el entorno Canvas
+    
+    /**
+     * Llama al API de Gemini con manejo de reintentos y configuración dinámica.
+     * @param {string} userQuery - La pregunta del usuario.
+     * @param {string} systemPrompt - Instrucción para el modelo.
+     * @param {boolean} useGrounding - Si debe usar Google Search (grounding).
+     * @returns {Promise<{text: string, sources: Array<{uri: string, title: string}>}>}
+     */
+    async function callGeminiApi(userQuery, systemPrompt, useGrounding) {
+        const payload = {
+            contents: [{ parts: [{ text: userQuery }] }],
+            systemInstruction: { parts: [{ text: systemPrompt }] },
+            tools: useGrounding ? [{ "google_search": {} }] : undefined,
+        };
+
+        const maxRetries = 3;
+        let attempt = 0;
+
+        while (attempt < maxRetries) {
+            try {
+                const response = await fetch(`${API_URL_GEMINI}${API_KEY}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                const candidate = result.candidates?.[0];
+
+                if (candidate && candidate.content?.parts?.[0]?.text) {
+                    const text = candidate.content.parts[0].text;
+                    let sources = [];
+                    const groundingMetadata = candidate.groundingMetadata;
+
+                    if (useGrounding && groundingMetadata && groundingMetadata.groundingAttributions) {
+                        sources = groundingMetadata.groundingAttributions
+                            .map(attribution => ({
+                                uri: attribution.web?.uri,
+                                title: attribution.web?.title,
+                            }))
+                            .filter(source => source.uri && source.title); 
+                    }
+                    return { text, sources };
+
+                } else {
+                    throw new Error("Respuesta del modelo incompleta o vacía.");
+                }
+
+            } catch (error) {
+                console.error(`Attempt ${attempt + 1} failed:`, error);
+                attempt++;
+                if (attempt < maxRetries) {
+                    const delay = Math.pow(2, attempt) * 1000; // Exponential backoff (1s, 2s, 4s)
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                } else {
+                    throw new Error(`Error al conectar con el servicio Gemini después de ${maxRetries} intentos.`);
+                }
+            }
+        }
+    }
+
+    /**
+     * Función que renderiza el Markdown básico a HTML para mejorar la legibilidad.
+     * Soporta negritas (**) y saltos de línea (\n).
+     * @param {string} markdownText - Texto en formato Markdown.
+     * @returns {string} Texto en formato HTML.
+     */
+    function renderMarkdownToHtml(markdownText) {
+        if (!markdownText) return '';
+        
+        // Convertir negritas (**) a <strong>
+        let htmlText = markdownText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        
+        // Convertir listas simples (asume que los guiones son listas en este contexto)
+        htmlText = htmlText.replace(/^- (.*)/gm, '<li>$1</li>');
+        if (htmlText.includes('<li>')) {
+            htmlText = '<ul>' + htmlText + '</ul>';
+        }
+
+        // Convertir saltos de línea (\n) a <br> solo si no están dentro de <ul>
+        // Esta es una simplificación; para listas solo queremos los <li>
+        if (markdownText.includes('- ')) {
+             // Si hay listas, solo sustituimos saltos de línea múltiples
+            htmlText = htmlText.replace(/(\r\n|\n|\r){2,}/g, '<br><br>');
+        } else {
+            // Si no hay listas, convertimos todos los saltos de línea a <br>
+             htmlText = htmlText.replace(/(\r\n|\n|\r)/g, '<br>');
+        }
+
+        return htmlText;
+    }
+
+
+    // --- MANEJO DE FEATURES UT1 Y UT9 ---
+
+    document.addEventListener('DOMContentLoaded', () => {
+        initializeTabs();
+        setupGeminiFeatures();
+    });
+
+    function setupGeminiFeatures() {
+        const explanationInput = document.getElementById('explanation-input');
+        const explanationButton = document.getElementById('generate-explanation-btn');
+        const explanationResult = document.getElementById('explanation-result');
+        const explanationLoader = document.getElementById('explanation-loader');
+
+        const regulationInput = document.getElementById('regulation-input');
+        const regulationButton = document.getElementById('generate-regulation-btn');
+        const regulationResult = document.getElementById('regulation-result');
+        const regulationLoader = document.getElementById('regulation-loader');
+        
+        // Listener para Explicación Avanzada (UT1)
+        explanationButton.addEventListener('click', () => handleAdvancedExplanation(explanationInput, explanationResult, explanationLoader));
+        explanationInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleAdvancedExplanation(explanationInput, explanationResult, explanationLoader);
+            }
+        });
+
+        // Listener para Asesor de Normativa (UT9)
+        regulationButton.addEventListener('click', () => handleRegulationAdvisor(regulationInput, regulationResult, regulationLoader));
+        regulationInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleRegulationAdvisor(regulationInput, regulationResult, regulationLoader);
+            }
+        });
+    }
+
+    async function handleAdvancedExplanation(inputElement, resultElement, loaderElement) {
+        const query = inputElement.value.trim();
+        if (!query) {
+            resultElement.innerHTML = `<p class="text-red-500 font-semibold">Por favor, introduce un concepto para explicar.</p>`;
+            return;
+        }
+
+        // 1. Mostrar estado de carga
+        resultElement.innerHTML = '';
+        loaderElement.classList.remove('hidden');
+
+        // INSTRUCCIÓN CLAVE DE FORMATO AÑADIDA
+        const systemPrompt = "Actúa como un profesor experto en sistemas de seguridad electrónica (UT1). Proporciona una explicación concisa, bien estructurada con saltos de línea y utilizando **Markdown para negritas** en los términos técnicos importantes. La respuesta debe tener un tono profesional y centrarse en la definición y función del concepto.";
+        
+        try {
+            const { text } = await callGeminiApi(query, systemPrompt, false);
+
+            // 2. Renderizar y Mostrar resultado
+            const formattedText = renderMarkdownToHtml(text);
+            
+            resultElement.innerHTML = `
+                <h4 class="font-bold text-lg mb-2 text-orange-700">${query.toUpperCase()}</h4>
+                <div class="markdown-content">${formattedText}</div>
+            `;
+        } catch (error) {
+            // 3. Manejar error
+            resultElement.innerHTML = `<p class="text-red-500 font-semibold">Error al generar la explicación. Inténtalo de nuevo. (${error.message})</p>`;
+        } finally {
+            // 4. Ocultar cargador
+            loaderElement.classList.add('hidden');
+        }
+    }
+
+
+    async function handleRegulationAdvisor(inputElement, resultElement, loaderElement) {
+        const query = inputElement.value.trim();
+        if (!query) {
+            resultElement.innerHTML = `<p class="text-red-500 font-semibold">Por favor, introduce una pregunta sobre normativa o PRL.</p>`;
+            return;
+        }
+
+        // 1. Mostrar estado de carga
+        resultElement.innerHTML = '';
+        loaderElement.classList.remove('hidden');
+
+        const englishQuery = translateToEnglishForSearch(query); 
+        const combinedQuery = `Consulta sobre normativa española de seguridad electrónica o PRL: "${query}" / English query: "${englishQuery}"`;
+
+        // INSTRUCCIÓN CLAVE DE FORMATO AÑADIDA
+        const systemPrompt = "Actúa como un consultor especialista en normativas españolas (REBT, Ley de Seguridad Privada, PRL). Basándote EXCLUSIVAMENTE en la información encontrada, responde de forma profesional, concisa y **bien formateada con Markdown (saltos de línea, negritas en términos legales/decretos)**. Responde en español y cita las fuentes utilizadas al final.";
+        
+        try {
+            const { text, sources } = await callGeminiApi(combinedQuery, systemPrompt, true);
+
+            // 2. Renderizar y Mostrar resultado
+            const formattedText = renderMarkdownToHtml(text);
+            
+            let sourceHtml = sources.length > 0 
+                ? '<div class="mt-4 pt-3 border-t border-gray-200"><p class="font-bold text-sm mb-1 text-gray-600">Fuentes Consultadas:</p><ul class="list-disc list-inside text-xs text-gray-500 space-y-1">' + 
+                  sources.slice(0, 3).map(s => `<li><a href="${s.uri}" target="_blank" class="text-blue-500 hover:underline">${s.title}</a></li>`).join('') + 
+                  '</ul></div>'
+                : '';
+
+            resultElement.innerHTML = `
+                <h4 class="font-bold text-lg mb-2 text-orange-700">Respuesta a: "${query}"</h4>
+                <div class="markdown-content">${formattedText}</div>
+                ${sourceHtml}
+            `;
+        } catch (error) {
+            // 3. Manejar error
+            resultElement.innerHTML = `<p class="text-red-500 font-semibold">Error al consultar la normativa. Verifica tu conexión o intenta con otra pregunta. (${error.message})</p>`;
+        } finally {
+            // 4. Ocultar cargador
+            loaderElement.classList.add('hidden');
+        }
+    }
+
+    function translateToEnglishForSearch(text) {
+        // Simple, quick translation logic for common Spanish terms to aid search grounding
+        const translations = {
+            "ley de seguridad privada": "Private Security Law Spain",
+            "rebt": "Low Voltage Electrotechnical Regulation Spain",
+            "prl": "Occupational Risk Prevention Spain",
+            "grado 4": "Grade 4 security system requirements Spain",
+            "grado 3": "Grade 3 security system requirements Spain",
+            "ict": "Common Telecommunications Infrastructure Regulation Spain",
+            "certificado de instalacion": "installation certificate requirements Spain",
+            "cinco reglas de oro": "five golden rules electrical safety",
+            "raee": "WEEE management Spain",
+            "toma de tierra": "earthing requirements"
+        };
+        let lowerText = text.toLowerCase();
+        let englishText = lowerText;
+        for (const [spanish, english] of Object.entries(translations)) {
+            englishText = englishText.replace(spanish, english);
+        }
+        return englishText;
+    }
+
+
+    // --- MANEJO DE PESTAÑAS Y FUNCIONALIDADES DE UI ---
+
+    // Datos para el detalle interactivo del proyecto (UT9)
+    const projectData = {
+        memoria: {
+            title: "Memoria Descriptiva (Detalle Ampliado)",
+            description: "Justifica la elección del sistema, describe el entorno a proteger, el <span class=\"font-semibold text-blue-800\">grado de seguridad</span> aplicado, y los <span class=\"font-semibold text-blue-800\">cálculos técnicos</span> que respaldan el diseño (como cálculo de <span class=\"font-semibold text-blue-800\">caída de tensión</span> y dimensionamiento de baterías de reserva)."
+        },
+        planos: {
+            title: "Planos y Esquemas (Detalle Ampliado)",
+            description: "Incluye el <span class=\"font-semibold text-blue-800\">plano de situación</span> (localización del inmueble), <span class=\"font-semibold text-blue-800\">planos de emplazamiento</span> (ubicación de cámaras, detectores, central), los <span class=\"font-semibold text-blue-800\">esquemas unifilares</span> de las conexiones y el detalle constructivo de las <span class=\"font-semibold text-blue-800\">canalizaciones</span>."
+        },
+        pliego: {
+            title: "Pliego de Condiciones",
+            description: "Detalla las <span class=\"font-semibold text-blue-800\">características mínimas</span> que deben cumplir los materiales (homologaciones), la forma en que se deben realizar las <span class=\"font-semibold text-blue-800\">pruebas de funcionamiento</span> y la garantía exigida por la normativa al instalador."
+        }
+    };
+
+    window.showProjectDetail = function(itemId) {
+        const info = projectData[itemId];
+        const detailPanel = document.getElementById('project-detail');
+        detailPanel.innerHTML = `
+            <div class="text-left">
+                <h3 class="font-bold text-xl mb-2 text-yellow-700">${info.title}</h3>
+                <p class="text-gray-700">${info.description}</p>
+            </div>
+        `;
+    };
+
+    function setActiveMainTab(targetId) {
+        const mainNavLinks = document.querySelectorAll('.main-nav-link');
+        const mainContentSections = document.querySelectorAll('.main-content-section');
+
+        mainNavLinks.forEach(link => {
+            link.classList.toggle('active', link.dataset.target === targetId);
+        });
+        mainContentSections.forEach(section => {
+            section.classList.toggle('active', section.id === `${targetId}-section`);
+        });
+    }
+
+    function setActiveSubTab(targetId) {
+        const subNavLinks = document.querySelectorAll('.sub-nav-link');
+        const subContentSections = document.querySelectorAll('#ut9-content-container .content-section');
+
+        subNavLinks.forEach(link => {
+            link.classList.toggle('active', link.dataset.target === targetId);
+        });
+        subContentSections.forEach(section => {
+            section.classList.toggle('active', section.id === `${targetId}-section`);
+        });
+    }
+
+    function initializeTabs() {
+        // Inicializar Pestañas Principales (UT1 y UT9)
+        document.querySelectorAll('.main-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                setActiveMainTab(link.dataset.target);
+            });
+        });
+
+        // Inicializar Pestañas Secundarias (Dentro de UT9)
+        document.querySelectorAll('.sub-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                setActiveSubTab(link.dataset.target);
+            });
+        });
+        
+        // Establecer la primera pestaña activa por defecto (UT1 y Marco Legal)
+        setActiveMainTab('ut1');
+        setActiveSubTab('ut9-marco-legal'); 
+        
+        // Mostrar el contenido principal ya que no hay login
+        document.getElementById('main-content').classList.remove('hidden');
+        
+        // Simular clic inicial en un componente de proyecto
+        showProjectDetail('memoria');
+    }
+    
+</script>
+
+</body>
+</html>
