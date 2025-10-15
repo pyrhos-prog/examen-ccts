@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Interactiva de Normativa y Seguridad Laboral (UT9)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7f9;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            color: #4b5563;
+        }
+        .nav-link.active {
+            border-bottom-color: #10b981; /* Esmeralda para un tema 'seguro' */
+            color: #10b981;
+            font-weight: 600;
+            background-color: #ecfdf5;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .info-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .info-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="text-center mb-10 bg-white p-6 rounded-xl shadow-lg">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">UT9: Normativa y Seguridad Laboral en Instalaciones</h1>
+            <p class="mt-2 text-lg text-gray-600">Explore el marco legal, las fases de un proyecto y la prevención de riesgos laborales esenciales.</p>
+        </header>
+
+        <nav class="flex justify-center border-b border-gray-300 mb-8 overflow-x-auto whitespace-nowrap bg-white rounded-t-lg shadow-inner">
+            <button class="nav-link py-4 px-4 sm:px-6 text-base sm:text-lg" data-target="marco-legal">Marco Legal y Normativo</button>
+            <button class="nav-link py-4 px-4 sm:px-6 text-base sm:text-lg" data-target="proyecto">Proyecto de Instalación</button>
+            <button class="nav-link py-4 px-4 sm:px-6 text-base sm:text-lg" data-target="riesgos">Seguridad y PRL</button>
+        </nav>
+
+        <main class="bg-white p-6 md:p-10 rounded-b-xl shadow-lg">
+            <!-- SECCIÓN 1: MARCO LEGAL Y NORMATIVO -->
+            <section id="marco-legal-section" class="content-section">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-semibold mb-4 text-gray-700">Marco Legislativo y Normativo Esencial</h2>
+                    <p class="max-w-4xl mx-auto text-gray-600">La regulación legal define cómo se deben diseñar, instalar y mantener los sistemas de seguridad electrónica, garantizando la calidad y la protección del usuario.</p>
+                </div>
+                
+                <h3 class="text-xl font-bold mb-4 text-emerald-600 border-b pb-2">Normativas de Aplicación Específica</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Instalaciones Eléctricas -->
+                    <div class="info-card bg-gray-50 p-5 rounded-lg border-l-4 border-yellow-500 shadow-md">
+                        <h4 class="text-lg font-bold mb-2 text-gray-800">Instalaciones Eléctricas (REBT)</h4>
+                        <p class="text-sm text-gray-700 leading-relaxed">
+                            Regulado por el <span class="font-semibold text-yellow-700">Reglamento Electrotécnico para Baja Tensión (REBT)</span>. Rige la ejecución y seguridad de las <span class="font-semibold text-yellow-700">instalaciones eléctricas</span>. Exige que los trabajos sean realizados por un <span class="font-semibold text-yellow-700">instalador autorizado</span>, quien debe emitir un <span class="font-semibold text-yellow-700">Certificado de Instalación</span> al finalizar.
+                        </p>
+                    </div>
+                    
+                    <!-- Telecomunicaciones -->
+                    <div class="info-card bg-gray-50 p-5 rounded-lg border-l-4 border-blue-500 shadow-md">
+                        <h4 class="text-lg font-bold mb-2 text-gray-800">Instalaciones de Telecomunicaciones (ICT)</h4>
+                        <p class="text-sm text-gray-700 leading-relaxed">
+                            Se rigen por el <span class="font-semibold text-blue-700">Reglamento de Infraestructuras Comunes de Telecomunicaciones (ICT)</span>. Define cómo deben ejecutarse los conductos, canalizaciones y las conexiones de los <span class="font-semibold text-blue-700">servicios de telecomunicación</span> necesarios para la alarma o el CCTV.
+                        </p>
+                    </div>
+
+                     <!-- Seguridad Electrónica General -->
+                    <div class="info-card bg-gray-50 p-5 rounded-lg border-l-4 border-red-500 shadow-md">
+                        <h4 class="text-lg font-bold mb-2 text-gray-800">Sistemas de Seguridad Electrónica</h4>
+                        <p class="text-sm text-gray-700 leading-relaxed">
+                            Marco legal principal: <span class="font-semibold text-red-700">Ley de Seguridad Privada</span> y su desarrollo reglamentario. Rige los requisitos para <span class="font-semibold text-red-700">empresas instaladoras</span>, la homologación de equipos y define los <span class="font-semibold text-red-700">Grados de Seguridad</span> de los sistemas (Grado 1 a 4) según el nivel de riesgo a proteger.
+                        </p>
+                    </div>
+                    
+                    <!-- Normativa de Incendios -->
+                    <div class="info-card bg-gray-50 p-5 rounded-lg border-l-4 border-orange-500 shadow-md">
+                        <h4 class="text-lg font-bold mb-2 text-gray-800">Instalaciones Contra Incendios (RSI)</h4>
+                        <p class="text-sm text-gray-700 leading-relaxed">
+                            Regidas por el <span class="font-semibold text-orange-700">Reglamento de Instalaciones de Protección Contra Incendios (RSI)</span> y el Código Técnico de la Edificación (CTE). Establece la obligatoriedad y el diseño de <span class="font-semibold text-orange-700">detectores de humo/calor</span> y sistemas de extinción en edificios.
+                        </p>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-bold mt-8 mb-4 text-emerald-600 border-b pb-2">Contexto Legal y Normas UNE</h3>
+                <ul class="list-disc list-inside space-y-2 pl-4 text-sm text-gray-700">
+                    <li>La <span class="font-semibold text-gray-800">Constitución Española</span> reconoce el derecho a la seguridad y a la intimidad, marco superior para la videovigilancia.</li>
+                    <li>El <span class="font-semibold text-gray-800">Código Civil</span> y el <span class="font-semibold text-gray-800">Código Penal</span> regulan los daños y las conductas punibles relacionadas con las instalaciones.</li>
+                    <li>Las <span class="font-semibold text-gray-800">Normas UNE</span> (Una Norma Española) establecen los estándares de calidad, funcionamiento y <span class="font-semibold text-gray-800">compatibilidad electromagnética</span> de los equipos utilizados.</li>
+                </ul>
+
+            </section>
+
+            <!-- SECCIÓN 2: PROYECTO DE INSTALACIÓN -->
+            <section id="proyecto-section" class="content-section">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-semibold mb-4 text-gray-700">Fases y Contenido del Proyecto de Seguridad</h2>
+                    <p class="max-w-4xl mx-auto text-gray-600">Un proyecto es el documento técnico que planifica, justifica y detalla la instalación. Sigue un desarrollo estricto para asegurar el cumplimiento normativo.</p>
+                </div>
+
+                <h3 class="text-xl font-bold mb-4 text-emerald-600 border-b pb-2">Fases de Desarrollo (Proceso Lógico Ampliado)</h3>
+                <ol class="list-decimal list-inside space-y-3 pl-4 mb-8">
+                    <li><span class="font-bold">Estudio Previo y Viabilidad:</span> Evaluación de la necesidad, normativa aplicable y <span class="font-semibold">viabilidad económica</span> del proyecto.</li>
+                    <li><span class="font-bold">Recopilación de Datos:</span> Análisis de riesgos, características del inmueble y deseos del cliente.</li>
+                    <li><span class="font-bold">Diseño del Sistema:</span> Selección de equipos, ubicación de detectores, definición de zonas y <span class="font-semibold">grado de seguridad</span>.</li>
+                    <li><span class="font-bold">Cálculos y Presupuesto:</span> Dimensionamiento de la alimentación, cableado y costes.</li>
+                    <li><span class="font-bold">Elaboración de Documentación:</span> Redacción de memorias, planos y pliegos de condiciones.</li>
+                    <li><span class="font-bold">Ejecución y Certificación:</span> Instalación física, pruebas y emisión del <span class="font-semibold">certificado final de seguridad</span>.</li>
+                </ol>
+
+                <h3 class="text-xl font-bold mb-4 text-emerald-600 border-b pb-2">Componentes Clave del Proyecto</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="info-card bg-blue-50 p-5 rounded-lg border-t-4 border-blue-600 shadow-md" onclick="showProjectDetail('memoria')">
+                        <h4 class="text-lg font-bold mb-2 text-gray-800">1. Memoria Descriptiva</h4>
+                        <p class="text-sm text-gray-600">Justificación técnica, normativa aplicada y descripción de la <span class="font-semibold text-blue-800">solución de seguridad</span> elegida.</p>
+                    </div>
+                    <div class="info-card bg-blue-50 p-5 rounded-lg border-t-4 border-blue-600 shadow-md" onclick="showProjectDetail('planos')">
+                        <h4 class="text-lg font-bold mb-2 text-gray-800">2. Planos y Esquemas</h4>
+                        <p class="text-sm text-gray-600">Representación gráfica de la <span class="font-semibold text-blue-800">ubicación de los elementos</span>, cableado y recorridos de los detectores.</p>
+                    </div>
+                    <div class="info-card bg-blue-50 p-5 rounded-lg border-t-4 border-blue-600 shadow-md" onclick="showProjectDetail('pliego')">
+                        <h4 class="text-lg font-bold mb-2 text-gray-800">3. Pliego de Condiciones</h4>
+                        <p class="text-sm text-gray-600">Requisitos de calidad de los materiales, <span class="font-semibold text-blue-800">especificaciones técnicas</span> y procedimientos de prueba.</p>
+                    </div>
+                </div>
+
+                <!-- Panel de Detalle del Proyecto -->
+                <div id="project-detail" class="mt-8 p-6 bg-yellow-50 rounded-lg shadow-inner min-h-[150px] flex items-center justify-center border-l-4 border-yellow-400">
+                    <p class="text-gray-500 text-lg">Haga clic en un componente del proyecto para ver su descripción extendida.</p>
+                </div>
+
+                <div class="mt-8 p-5 bg-green-50 rounded-lg border-l-4 border-green-600 shadow-md">
+                    <h4 class="text-lg font-bold mb-2 text-green-700">Manual de Usuario</h4>
+                    <p class="text-sm text-gray-700 leading-relaxed">
+                        Documento esencial que se entrega al cliente. Debe contener la <span class="font-semibold text-green-700">descripción del funcionamiento</span>, instrucciones para <span class="font-semibold text-green-700">armar y desarmar</span>, procedimientos en caso de alarma y datos de contacto de la empresa instaladora para el <span class="font-semibold text-green-700">mantenimiento</span>.
+                    </p>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 3: SEGURIDAD Y PRL -->
+            <section id="riesgos-section" class="content-section">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-semibold mb-4 text-gray-700">Prevención de Riesgos Laborales (PRL)</h2>
+                    <p class="max-w-4xl mx-auto text-gray-600">La PRL es crucial en montaje y mantenimiento. El empresario y el trabajador tienen obligaciones específicas para garantizar un entorno de trabajo seguro.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Obligaciones -->
+                    <div class="bg-red-50 p-6 rounded-lg border-l-4 border-red-600 shadow-md">
+                        <h3 class="text-xl font-bold mb-4 text-red-800">Obligaciones del Empresario</h3>
+                        <ul class="space-y-3 text-sm text-gray-700">
+                            <li><span class="font-semibold text-red-700">Constituir el Servicio de Prevención:</span> Organizar los recursos necesarios para el cumplimiento del Plan de PRL.</li>
+                            <li><span class="font-semibold text-red-700">Evaluar los riesgos:</span> Identificar todos los peligros asociados a la instalación.</li>
+                            <li><span class="font-semibold text-red-700">Planificar la prevención:</span> Tomar medidas para reducir o eliminar los riesgos.</li>
+                            <li><span class="font-semibold text-red-700">Vigilancia de la salud:</span> Garantizar la aptitud de los trabajadores para el puesto.</li>
+                            <li><span class="font-semibold text-red-700">Información y formación:</span> Capacitar a los empleados sobre los riesgos específicos.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Derechos y Obligaciones del Trabajador -->
+                    <div class="bg-teal-50 p-6 rounded-lg border-l-4 border-teal-600 shadow-md">
+                        <h3 class="text-xl font-bold mb-4 text-teal-800">Derechos y Deberes del Trabajador</h3>
+                        <ul class="space-y-3 text-sm text-gray-700">
+                            <li><span class="font-semibold text-teal-700">Derecho a la protección:</span> Recibir equipos de protección individual (EPIs).</li>
+                            <li><span class="font-semibold text-teal-700">Deber de cumplir las normas:</span> Seguir las instrucciones de seguridad y usar correctamente los EPIs.</li>
+                            <li><span class="font-semibold text-teal-700">Informar de riesgos:</span> Comunicar de inmediato cualquier situación de peligro.</li>
+                            <li><span class="font-semibold text-teal-700">Participación:</span> Colaborar con el servicio de prevención.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-10">
+                    <h3 class="text-xl font-bold mb-4 text-gray-700 border-b pb-2">Riesgos Críticos y Medidas Preventivas</h3>
+                    <p class="mb-4 text-gray-600">En el montaje de sistemas, los riesgos más comunes son físicos y requieren EPIs y procedimientos específicos.</p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-orange-600">
+                            <p class="font-semibold text-lg text-gray-800">Riesgo Eléctrico</p>
+                            <p class="text-sm text-gray-500 mt-1">Peligro por <span class="font-semibold text-orange-700">contacto con tensión</span> (directo/indirecto). Prevención: Uso de <span class="font-semibold text-orange-700">EPIs aislantes</span> (guantes, calzado, herramientas homologadas) y aplicación de las <span class="font-semibold text-orange-700">cinco reglas de oro</span> (desconectar, verificar ausencia de tensión, etc.).</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-orange-600">
+                            <p class="font-semibold text-lg text-gray-800">Caída en Altura</p>
+                            <p class="text-sm text-gray-500 mt-1">Riesgo al usar <span class="font-semibold text-orange-700">escaleras, andamios</span> o tejados. Prevención: Uso de <span class="font-semibold text-orange-700">arnés de seguridad</span> anclado a un punto seguro, inspección previa de escaleras y <span class="font-semibold text-orange-700">delimitación de zonas de riesgo</span>.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-10 p-5 bg-gray-100 rounded-lg shadow-inner">
+                    <h3 class="text-xl font-bold mb-3 text-gray-700">Gestión de Residuos (Medio Ambiente)</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed mb-3">
+                        La <span class="font-semibold text-gray-800">Ley 10/1998</span> obliga a la correcta gestión. Los residuos se clasifican en la actividad de instalación y mantenimiento:
+                    </p>
+                    <ul class="list-disc list-inside space-y-1 pl-4 text-sm text-gray-700">
+                        <li><span class="font-semibold text-gray-800">Residuos de Instalación:</span> Incluyen escombros, tierras, y embalajes (cartón, plásticos) que deben ser depositados en <span class="font-semibold text-gray-800">contenedores específicos</span>.</li>
+                        <li><span class="font-semibold text-gray-800">Residuos de Mantenimiento:</span> Como cables, papel y otros materiales sin componentes peligrosos.</li>
+                        <li><span class="font-semibold text-gray-800">RAEE (Aparatos Eléctricos y Electrónicos):</span> Regulados por el <span class="font-semibold text-gray-800">RD 208/2005</span>. Especialmente los que contienen <span class="font-semibold text-gray-800">componentes peligrosos</span> (pilas, baterías, placas). Deben ser gestionados por <span class="font-semibold text-gray-800">gestores autorizados</span>.</li>
+                    </ul>
+                    <p class="text-xs mt-3 text-gray-500">Otras leyes aplicables: Ley 11/1997 (Envases) y Real Decreto 106/2008 (Pilas y Acumuladores).</p>
+                </div>
+
+            </section>
+        </main>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const navLinks = document.querySelectorAll('.nav-link');
+    const contentSections = document.querySelectorAll('.content-section');
+
+    const projectData = {
+        memoria: {
+            title: "Memoria Descriptiva (Detalle Ampliado)",
+            description: "Esta sección justifica la elección del sistema, describe el entorno a proteger, el <span class=\"font-semibold text-blue-800\">grado de seguridad</span> aplicado (ej. Grado 3 o 4), y los <span class=\"font-semibold text-blue-800\">cálculos técnicos</span> que respaldan el diseño (como cálculo de <span class=\"font-semibold text-blue-800\">caída de tensión</span>, consumo de energía y dimensionamiento de baterías de reserva)."
+        },
+        planos: {
+            title: "Planos y Esquemas (Detalle Ampliado)",
+            description: "Incluye el <span class=\"font-semibold text-blue-800\">plano de situación</span> (localización del inmueble), <span class=\"font-semibold text-blue-800\">planos de emplazamiento</span> (ubicación de cámaras, detectores, central), los <span class=\"font-semibold text-blue-800\">esquemas unifilares</span> de las conexiones y el detalle constructivo de las <span class=\"font-semibold text-blue-800\">canalizaciones</span>."
+        },
+        pliego: {
+            title: "Pliego de Condiciones",
+            description: "Detalla las <span class=\"font-semibold text-blue-800\">características mínimas</span> que deben cumplir los materiales (homologaciones, certificaciones), la forma en que se deben realizar las <span class=\"font-semibold text-blue-800\">pruebas de funcionamiento</span> y la garantía exigida por la normativa al instalador."
+        }
+    };
+
+    function setActiveTab(targetId) {
+        navLinks.forEach(link => {
+            link.classList.toggle('active', link.dataset.target === targetId);
+        });
+        contentSections.forEach(section => {
+            section.classList.toggle('active', section.id === `${targetId}-section`);
+        });
+    }
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            setActiveTab(link.dataset.target);
+        });
+    });
+
+    // Funcionalidad para mostrar detalle del Proyecto
+    window.showProjectDetail = function(itemId) {
+        const info = projectData[itemId];
+        const detailPanel = document.getElementById('project-detail');
+        detailPanel.innerHTML = `
+            <div class="text-left">
+                <h3 class="font-bold text-xl mb-2 text-yellow-700">${info.title}</h3>
+                <p class="text-gray-700">${info.description}</p>
+            </div>
+        `;
+    };
+
+    // Establecer la primera pestaña activa al cargar
+    setActiveTab('marco-legal');
+
+});
+</script>
+
+</body>
+</html>
