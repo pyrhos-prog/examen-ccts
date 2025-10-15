@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Interactiva de Sistemas de Seguridad Electrónica - COMPLETA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals & Slate Blue -->
+    <!-- Application Structure Plan: Se ha mantenido la SPA con navegación por pestañas (Visión General, Componentes, Grados de Seguridad, Instalación y Mantenimiento) pero se ha incrementado significativamente la densidad de información y la interactividad. La sección Visión General ahora detalla la obligatoriedad y los sistemas. Componentes se expande con los elementos constitutivos y los medios de comunicación. Cada tarjeta interactiva se ha enriquecido con más detalles. El objetivo es ofrecer una "exploración profunda" no lineal del informe. -->
+    <!-- Visualization & Content Choices: 1. Clasificación de Sistemas: (Meta: Profundizar/Organizar) -> Nuevas Tarjetas más detalladas (HTML/CSS/JS) y un acordeón para la Obligatoriedad de Instalación. 2. Flujo de Componentes: (Meta: Relacionar/Detallar) -> El diagrama de flujo ahora actualiza un panel con listas de los elementos (detectores, actuadores) y sus funciones. 3. Medios de Comunicación: (Meta: Informar) -> Tarjetas de contenido (HTML/CSS) con toggles para mostrar la fiabilidad de cada medio (cableado, inalámbrico, remoto). 4. Grados de Seguridad: (Meta: Comparar) -> Mantenido Gráfico de Barras (Chart.js/Canvas) para comparación visual rápida. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa;
+        }
+        .nav-link {
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link.active {
+            border-bottom-color: #3b82f6;
+            color: #3b82f6;
+            font-weight: 600;
+            background-color: #e0f2fe;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .card-system {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            min-height: 200px;
+        }
+        .card-system:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Guía Interactiva de Sistemas de Seguridad Electrónica</h1>
+            <p class="mt-2 text-lg text-gray-600">Análisis y Profundización del Informe Técnico.</p>
+        </header>
+
+        <nav class="flex justify-center border-b border-gray-300 mb-8 overflow-x-auto whitespace-nowrap">
+            <button class="nav-link py-4 px-4 sm:px-6 text-base sm:text-lg" data-target="vision-general">Visión General</button>
+            <button class="nav-link py-4 px-4 sm:px-6 text-base sm:text-lg" data-target="componentes">Arquitectura (Elementos y Com.)</button>
+            <button class="nav-link py-4 px-4 sm:px-6 text-base sm:text-lg" data-target="grados">Grados de Seguridad</button>
+            <button class="nav-link py-4 px-4 sm:px-6 text-base sm:text-lg" data-target="instalacion">Instalación y Mantenimiento</button>
+        </nav>
+
+        <main>
+            <!-- SECCIÓN 1: VISIÓN GENERAL (Clasificación + Obligatoriedad) -->
+            <section id="vision-general-section" class="content-section">
+                 <div class="text-center mb-12">
+                    <h2 class="text-2xl font-semibold mb-2">Clasificación y Obligatoriedad de Instalación</h2>
+                    <p class="max-w-4xl mx-auto text-gray-600">Explore la clasificación de los sistemas según su finalidad y determine bajo qué criterios la instalación es obligatoria por ley o meramente opcional, dependiendo de las características del recinto y el riesgo.</p>
+                </div>
+                
+                <!-- Clasificación de Sistemas - Ahora más detallada -->
+                <h3 class="text-xl font-semibold mb-4 text-gray-700">Tipos de Sistemas: Profundización</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Incendio -->
+                    <div class="card-system bg-white p-5 rounded-lg shadow-md border-t-4 border-red-500" onclick="showSystemDetail('incendio')">
+                        <span class="text-4xl mb-2 block">&#128293;</span>
+                        <h4 class="text-lg font-bold">Sistemas Contra Incendio</h4>
+                        <p class="text-sm text-gray-500 mt-1">Detección temprana de humo o calor para iniciar alertas y contramedidas.</p>
+                    </div>
+                    <!-- Gas -->
+                    <div class="card-system bg-white p-5 rounded-lg shadow-md border-t-4 border-yellow-500" onclick="showSystemDetail('gas')">
+                        <span class="text-4xl mb-2 block">&#9888;&#65039;</span>
+                        <h4 class="text-lg font-bold">Sistemas de Detección de Gas</h4>
+                        <p class="text-sm text-gray-500 mt-1">Alerta ante gases tóxicos o inflamables para prevenir explosiones o asfixia.</p>
+                    </div>
+                    <!-- Antirrobo/Intrusión -->
+                    <div class="card-system bg-white p-5 rounded-lg shadow-md border-t-4 border-green-500" onclick="showSystemDetail('intrusión')">
+                        <span class="text-4xl mb-2 block">&#128737;&#65039;</span>
+                        <h4 class="text-lg font-bold">Antirrobo e Intrusión</h4>
+                        <p class="text-sm text-gray-500 mt-1">Advierten sobre allanamientos y controlan accesos no autorizados.</p>
+                    </div>
+                    <!-- CCTV -->
+                    <div class="card-system bg-white p-5 rounded-lg shadow-md border-t-4 border-blue-500" onclick="showSystemDetail('cctv')">
+                        <span class="text-4xl mb-2 block">&#128247;</span>
+                        <h4 class="text-lg font-bold">Circuito Cerrado de TV (CCTV)</h4>
+                        <p class="text-sm text-gray-500 mt-1">Visualización y grabación de imágenes en tiempo real como disuasión y registro.</p>
+                    </div>
+                </div>
+
+                <!-- Panel de Detalle del Sistema -->
+                <div id="system-detail" class="mt-8 p-6 bg-white rounded-lg shadow-xl border-l-4 border-gray-300 min-h-[150px]">
+                    <p class="text-gray-500 text-lg text-center">Haga clic en una tarjeta de sistema para ver la definición y los detalles de sus elementos clave.</p>
+                </div>
+                
+                <!-- Obligatoriedad -->
+                <div class="mt-12 max-w-4xl mx-auto">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-700">Obligatoriedad de la Instalación</h3>
+                    <details class="bg-blue-50 p-4 rounded-lg shadow-sm cursor-pointer border border-blue-200 open:bg-blue-100 transition">
+                        <summary class="font-bold text-lg text-blue-800">Instalación Obligatoria (Por Ley)</summary>
+                        <p class="mt-2 text-gray-700 leading-relaxed">
+                            La instalación de ciertos sistemas de seguridad electrónica es <span class="font-semibold text-blue-800">exigida por la legislación</span> en lugares específicos debido a la naturaleza de la actividad o los bienes que albergan. Esto incluye, entre otros, <span class="font-semibold text-blue-800">bancos</span>, <span class="font-semibold text-blue-800">hospitales</span>, <span class="font-semibold text-blue-800">joyerías</span>, <span class="font-semibold text-blue-800">gasolineras</span> y almacenes de alto riesgo o materiales peligrosos. El cumplimiento normativo es primordial y el grado de seguridad es definido por ley (Grados 3 o 4).
+                        </p>
+                    </details>
+                    <details class="bg-green-50 p-4 rounded-lg shadow-sm cursor-pointer border border-green-200 mt-3 open:bg-green-100 transition">
+                        <summary class="font-bold text-lg text-green-800">Instalación Opcional (Decisión del Propietario)</summary>
+                        <p class="mt-2 text-gray-700 leading-relaxed">
+                            En la mayoría de los casos (viviendas, pequeños comercios, oficinas estándar), el propietario decide instalar un sistema de seguridad por <span class="font-semibold text-green-800">diferentes consideraciones</span>. Esta decisión se basa en el presupuesto disponible, las características del recinto, la necesidad percibida y las preferencias del usuario. La elección del sistema y el grado (generalmente Grados 1 o 2) es voluntaria.
+                        </p>
+                    </details>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 2: ARQUITECTURA (Elementos Constitutivos + Comunicación) -->
+            <section id="componentes-section" class="content-section">
+                <div class="text-center mb-12">
+                    <h2 class="text-2xl font-semibold mb-2">Elementos Constitutivos y Flujo Lógico</h2>
+                    <p class="max-w-4xl mx-auto text-gray-600">Todo sistema electrónico sigue un proceso lógico: <span class="font-semibold text-gray-800">Detectar, Procesar y Actuar</span>. Haga clic en cada etapa para ver los elementos clave (detectores, actuadores) y sus funciones específicas, entendiendo así la arquitectura completa.</p>
+                </div>
+
+                <!-- Diagrama de Flujo -->
+                <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-center mb-8">
+                    <div id="componente-detectores" class="componente-btn p-6 bg-yellow-200 rounded-lg shadow-lg cursor-pointer w-full md:w-64 transform hover:scale-105 transition-transform border-l-8 border-yellow-500">
+                        <h3 class="font-bold text-lg">1. ENTRADAS</h3>
+                        <p>Detectores y Pulsadores</p>
+                    </div>
+                    <div class="text-4xl font-bold text-gray-400 hidden md:block">&rarr;</div>
+                    <div class="text-4xl font-bold text-gray-400 rotate-90 md:hidden">&darr;</div>
+                    <div id="componente-central" class="componente-btn p-6 bg-red-200 rounded-lg shadow-lg cursor-pointer w-full md:w-64 transform hover:scale-105 transition-transform border-l-8 border-red-500">
+                        <h3 class="font-bold text-lg">2. PROCESO</h3>
+                        <p>Central de Alarmas</p>
+                    </div>
+                    <div class="text-4xl font-bold text-gray-400 hidden md:block">&rarr;</div>
+                    <div class="text-4xl font-bold text-gray-400 rotate-90 md:hidden">&darr;</div>
+                    <div id="componente-actuadores" class="componente-btn p-6 bg-purple-200 rounded-lg shadow-lg cursor-pointer w-full md:w-64 transform hover:scale-105 transition-transform border-l-8 border-purple-500">
+                        <h3 class="font-bold text-lg">3. SALIDAS</h3>
+                        <p>Actuadores y Avisos</p>
+                    </div>
+                </div>
+                
+                <!-- Detalle de los Elementos Constitutivos -->
+                <div id="componente-detalle" class="mt-8 p-6 bg-white rounded-lg shadow-inner min-h-[250px] flex items-center justify-center border-t-2 border-gray-200">
+                    <p class="text-gray-500 text-lg">Seleccione una etapa del flujo para ver qué elementos la constituyen y su descripción detallada.</p>
+                </div>
+
+                <!-- Medios de Comunicación -->
+                <div class="mt-12">
+                    <h3 class="text-2xl font-semibold text-center mb-6">Medios de Comunicación entre Componentes</h3>
+                    <p class="max-w-4xl mx-auto text-gray-600 text-center mb-8">La forma en que los elementos de un sistema (detectores, central, actuadores) intercambian información es crucial para su fiabilidad y flexibilidad. Se clasifican en tres tipos principales.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-gray-100 p-5 rounded-lg shadow-md border-l-4 border-sky-500">
+                            <h4 class="font-bold text-xl mb-2 text-sky-700">Cableado (Conductor)</h4>
+                            <p class="text-sm text-gray-600 mb-2">Usa cables físicos (cobre, fibra óptica). Ofrece la <span class="font-semibold text-sky-800">máxima fiabilidad</span> y resistencia a interferencias.</p>
+                            <details class="mt-2 text-sm text-gray-700">
+                                <summary class="font-semibold cursor-pointer">Ventajas y Desventajas</summary>
+                                <ul class="list-disc list-inside mt-1 space-y-0.5">
+                                    <li>Alta seguridad y menor latencia.</li>
+                                    <li>Mayor costo y complejidad en la instalación.</li>
+                                    <li>Difícil de sabotear.</li>
+                                </ul>
+                            </details>
+                        </div>
+                        <div class="bg-gray-100 p-5 rounded-lg shadow-md border-l-4 border-pink-500">
+                            <h4 class="font-bold text-xl mb-2 text-pink-700">Inalámbrico (Radiofrecuencia)</h4>
+                            <p class="text-sm text-gray-600 mb-2">Utiliza ondas de radio. Proporciona gran <span class="font-semibold text-pink-800">flexibilidad y escalabilidad</span> sin obras.</p>
+                            <details class="mt-2 text-sm text-gray-700">
+                                <summary class="font-semibold cursor-pointer">Ventajas y Desventajas</summary>
+                                <ul class="list-disc list-inside mt-1 space-y-0.5">
+                                    <li>Fácil instalación y mantenimiento.</li>
+                                    <li>Dependencia de baterías.</li>
+                                    <li>Susceptible a interferencias y 'inhibidores' (Grado 4 requiere doble banda).</li>
+                                </ul>
+                            </details>
+                        </div>
+                        <div class="bg-gray-100 p-5 rounded-lg shadow-md border-l-4 border-teal-500">
+                            <h4 class="font-bold text-xl mb-2 text-teal-700">Remoto (Internet/Telefonía)</h4>
+                            <p class="text-sm text-gray-600 mb-2">Para comunicación de la central al exterior (CRA o usuario) vía <span class="font-semibold text-teal-800">GSM/GPRS/IP</span>.</p>
+                            <details class="mt-2 text-sm text-gray-700">
+                                <summary class="font-semibold cursor-pointer">Usos y Relevancia</summary>
+                                <ul class="list-disc list-inside mt-1 space-y-0.5">
+                                    <li>Envío de alertas y verificación remota.</li>
+                                    <li>La conexión IP es la más usada por su velocidad.</li>
+                                    <li>Es el medio principal para la 'iniciación de medidas oportunas'.</li>
+                                </ul>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 3: GRADOS DE SEGURIDAD -->
+            <section id="grados-section" class="content-section">
+                <div class="text-center mb-12">
+                    <h2 class="text-2xl font-semibold mb-2">Grados de Seguridad Normativos (UNE-EN 50131-1)</h2>
+                    <p class="max-w-4xl mx-auto text-gray-600">La clasificación define la robustez y resistencia al sabotaje del sistema. El gráfico muestra la intensidad del riesgo percibido para cada grado. Explore con los botones la infraestructura necesaria para cada nivel de protección.</p>
+                </div>
+                
+                <div class="chart-container mb-8">
+                    <canvas id="gradosChart"></canvas>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-4 mb-8">
+                    <button class="grado-btn px-6 py-2 bg-gray-200 rounded-full font-semibold hover:bg-gray-300 transition" data-grade="1">Grado 1</button>
+                    <button class="grado-btn px-6 py-2 bg-gray-200 rounded-full font-semibold hover:bg-gray-300 transition" data-grade="2">Grado 2</button>
+                    <button class="grado-btn px-6 py-2 bg-gray-200 rounded-full font-semibold hover:bg-gray-300 transition" data-grade="3">Grado 3</button>
+                    <button class="grado-btn px-6 py-2 bg-gray-200 rounded-full font-semibold hover:bg-gray-300 transition" data-grade="4">Grado 4</button>
+                </div>
+
+                <div id="grado-detalle" class="p-6 bg-white rounded-lg shadow-inner min-h-[200px] border-t-2 border-blue-100">
+                     <p class="text-gray-500 text-lg text-center">Seleccione un grado para ver su descripción detallada, aplicación típica y requisitos técnicos.</p>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 4: INSTALACIÓN Y MANTENIMIENTO -->
+            <section id="instalacion-section" class="content-section">
+                 <div class="text-center mb-12">
+                    <h2 class="text-2xl font-semibold mb-2">Requisitos de Instalación y Tipos de Mantenimiento</h2>
+                    <p class="max-w-4xl mx-auto text-gray-600">Para garantizar la máxima fiabilidad, la implementación y el soporte de los sistemas de seguridad deben seguir un estricto protocolo profesional y legal, así como un plan de mantenimiento continuo.</p>
+                </div>
+
+                <h3 class="text-xl font-semibold mb-4 text-gray-700">Proceso de Instalación Profesional</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-5 rounded-lg shadow-md border-l-4 border-lime-500">
+                        <h4 class="text-lg font-bold mb-2 text-lime-700">Empresas Autorizadas</h4>
+                        <p class="text-sm text-gray-600">Solo empresas <span class="font-semibold text-lime-800">autorizadas e inscritas</span> pueden realizar la instalación, reparación y mantenimiento. Esto asegura el cumplimiento de la legislación y el uso de equipos homologados.</p>
+                    </div>
+                    <div class="bg-white p-5 rounded-lg shadow-md border-l-4 border-lime-500">
+                        <h4 class="text-lg font-bold mb-2 text-lime-700">Documentación Obligatoria</h4>
+                        <p class="text-sm text-gray-600">El instalador debe entregar la documentación completa: <span class="font-semibold text-lime-800">manuales de uso y mantenimiento</span>, certificado de garantía y el <span class="font-semibold text-lime-800">certificado de homologación</span> de los equipos instalados.</p>
+                    </div>
+                     <div class="bg-white p-5 rounded-lg shadow-md border-l-4 border-lime-500">
+                        <h4 class="text-lg font-bold mb-2 text-lime-700">Herramientas Esenciales</h4>
+                        <p class="text-sm text-gray-600">Se requiere equipos especializados para verificación (multímetro, medidor de aislamiento, comprobadores de cámaras, analizador de redes Cat. 6+), asegurando la <span class="font-semibold text-lime-800">calidad de la ejecución</span>.</p>
+                    </div>
+                </div>
+
+                <div class="mt-12">
+                    <h3 class="text-xl font-semibold text-center mb-6 text-gray-700">Tipos de Mantenimiento Obligatorio</h3>
+                    <p class="max-w-3xl mx-auto text-gray-600 text-center mb-8">El mantenimiento regular (preventivo) es crucial y obligatorio en muchas instalaciones para minimizar las falsas alarmas y asegurar la operatividad.</p>
+                    <div class="max-w-4xl mx-auto space-y-4">
+                        <details class="bg-white p-4 rounded-lg shadow-md cursor-pointer border-l-4 border-gray-400">
+                            <summary class="font-bold text-lg">Mantenimiento Correctivo</summary>
+                            <p class="mt-2 text-gray-600"><span class="font-semibold text-gray-800">Reactivo.</span> Se enfoca en solucionar un defecto o reparar una avería que ya ha ocurrido. Su objetivo es restaurar el funcionamiento normal del sistema inmediatamente.</p>
+                        </details>
+                        <details class="bg-white p-4 rounded-lg shadow-md cursor-pointer border-l-4 border-yellow-400">
+                            <summary class="font-bold text-lg">Mantenimiento Preventivo</summary>
+                            <p class="mt-2 text-gray-600"><span class="font-semibold text-gray-800">Proactivo y Programado.</span> Consiste en revisiones periódicas (trimestrales, semestrales) para limpiar, analizar y calibrar los equipos. Es <span class="font-semibold text-yellow-800">obligatorio</span> en ciertas instalaciones para evitar futuras averías.</p>
+                        </details>
+                        <details class="bg-white p-4 rounded-lg shadow-md cursor-pointer border-l-4 border-purple-400">
+                            <summary class="font-bold text-lg">Mantenimiento Predictivo</summary>
+                            <p class="mt-2 text-gray-600"><span class="font-semibold text-gray-800">Anticipatorio.</span> Utiliza el análisis de datos para predecir cuándo un componente podría fallar. Permite planificar la intervención justo antes de la avería, optimizando recursos y minimizando tiempos de inactividad.</p>
+                        </details>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const navLinks = document.querySelectorAll('.nav-link');
+    const contentSections = document.querySelectorAll('.content-section');
+
+    // Se ha cambiado el contenido de las descripciones para usar etiquetas HTML (<span>) en lugar de asteriscos (*) para las negritas.
+    const data = {
+        // DETALLE DE SISTEMAS
+        sistemas: {
+            incendio: {
+                title: "Sistemas Contra Incendio",
+                description: "Su función es detectar la presencia de humo o calor para alertar tempranamente. Los elementos clave incluyen: <span class=\"font-semibold text-red-700\">Detectores de humo</span> (iónicos u ópticos), <span class=\"font-semibold text-red-700\">Central de Detección de Incendios</span> (el cerebro), <span class=\"font-semibold text-red-700\">Pulsadores manuales</span> (entrada de emergencia) y <span class=\"font-semibold text-red-700\">Actuadores</span> (sirenas, luces, sistemas de extinción)."
+            },
+            gas: {
+                title: "Sistemas de Detección de Gas",
+                description: "Diseñados para monitorear la atmósfera en busca de concentraciones peligrosas de gases (tóxicos o inflamables). Los componentes típicos son: <span class=\"font-semibold text-yellow-700\">Sondas y Detectores de gas</span>, <span class=\"font-semibold text-yellow-700\">Central de Control de Gas</span> (interpreta las lecturas) y <span class=\"font-semibold text-yellow-700\">Válvulas de corte</span> o <span class=\"font-semibold text-yellow-700\">Extractores</span> (como actuadores de seguridad)."
+            },
+            intrusión: {
+                title: "Sistemas Antirrobo e Intrusión",
+                description: "Protegen bienes y personas advirtiendo sobre accesos no autorizados. Elementos clave: <span class=\"font-semibold text-green-700\">Detectores volumétricos</span> (PIR, microondas), <span class=\"font-semibold text-green-700\">Detectores perimetrales</span> (contacto magnético, barreras), <span class=\"font-semibold text-green-700\">Teclados</span> (control de acceso), <span class=\"font-semibold text-green-700\">Central de Alarmas</span> y <span class=\"font-semibold text-green-700\">Avisadores acústicos y remotos</span>."
+            },
+            cctv: {
+                title: "Circuito Cerrado de Televisión (CCTV)",
+                description: "Su objetivo es vigilar y grabar. Los elementos son: <span class=\"font-semibold text-blue-700\">Cámaras de seguridad</span> (analógicas, IP, PTZ), <span class=\"font-semibold text-blue-700\">Grabadores</span> (DVR/NVR) que almacenan las imágenes, <span class=\"font-semibold text-blue-700\">Monitores</span> (visualización) y <span class=\"font-semibold text-blue-700\">Software de Gestión</span> (análisis de video y control)."
+            }
+        },
+        // DETALLE DE COMPONENTES CONSTITUTIVOS
+        componentes: {
+            detectores: {
+                title: "1. Entradas: Detectores y Pulsadores",
+                description: "Son los '<span class=\"font-semibold text-yellow-700\">sentidos</span>' del sistema. Miden variables físicas (movimiento, calor, presión, apertura) o captan eventos manuales (pulsadores de pánico). Envían una <span class=\"font-semibold text-yellow-700\">señal eléctrica de bajo voltaje</span> (señal de alarma) a la central. Ejemplos: Detectores volumétricos (PIR), contactos magnéticos, detectores de humo y pulsadores manuales."
+            },
+            central: {
+                title: "2. Proceso: Central de Alarmas",
+                description: "Es el '<span class=\"font-semibold text-red-700\">cerebro</span>' del sistema. <span class=\"font-semibold text-red-700\">Funciones Clave:</span> 1) Recibe e interpreta señales. 2) Toma decisiones (activa salidas). 3) Gestiona el sistema (armado/desarmado, configuración). 4) Suministra alimentación al sistema. 5) Almacena el registro de eventos para auditoría. Sin ella, el sistema no funciona."
+            },
+            actuadores: {
+                title: "3. Salidas: Actuadores y Avisos",
+                description: "Ejecutan la <span class=\"font-semibold text-purple-700\">respuesta ordenada por la central</span>. Pueden ser visibles/audibles (disuasión) o silenciosos (alerta remota). Ejemplos: <span class=\"font-semibold text-purple-700\">Sirenas</span> (alarma acústica), <span class=\"font-semibold text-purple-700\">Luces estroboscópicas</span>, Dispositivos de comunicación para enviar la alarma a la <span class=\"font-semibold text-purple-700\">Central Receptora de Alarmas (CRA)</span> o directamente al usuario vía telefónica/IP."
+            }
+        },
+        // DETALLE DE GRADOS
+        grados: {
+            "1": {
+                title: "Grado 1: Riesgo Bajo (Sin Sabotaje)",
+                description: "Diseñado para sistemas con señalización acústica local, sin conexión a una CRA. Aplicación típica: <span class=\"font-semibold text-gray-700\">Viviendas o almacenes no expuestos a riesgos especiales</span>. Se considera que un intruso accidental o poco experimentado no intentará sabotearlo. Es el nivel de seguridad más básico, centrado en la disuasión acústica."
+            },
+            "2": {
+                title: "Grado 2: Riesgo Bajo-Medio (Intruso Ocasional)",
+                description: "Recomendado para <span class=\"font-semibold text-blue-700\">viviendas y pequeños comercios</span>. Exige <span class=\"font-semibold text-blue-700\">conexión a una CRA</span> o aviso al propietario/Policía. Los componentes son de uso general. Se espera que el intruso sea ocasional y sin gran conocimiento técnico. El sistema debe resistir intentos básicos de anulación."
+            },
+            "3": {
+                title: "Grado 3: Riesgo Medio-Alto (Intruso Profesional)",
+                description: "Obligatorio para <span class=\"font-semibold text-blue-700\">comercios de alto riesgo</span> (joyerías, gasolineras, bancos) y lugares sensibles. Debe estar <span class=\"font-semibold text-blue-700\">conectado a una CRA</span>. Se considera probable un intento de sabotaje por parte de intrusos con cierto conocimiento y herramientas. Exige equipos robustos con protecciones contra la manipulación."
+            },
+            "4": {
+                title: "Grado 4: Riesgo Alto (Máxima Seguridad)",
+                description: "Reservado para <span class=\"font-semibold text-blue-700\">infraestructuras críticas</span> (instalaciones militares, almacenamiento de explosivos/materiales peligrosos) o donde la seguridad es vital. Se considera muy probable un <span class=\"font-semibold text-blue-700\">ataque planificado y sofisticado</span>. Exige los equipos más seguros del mercado, con <span class=\"font-semibold text-blue-700\">redundancia</span> y sistemas de detección de inhibidores."
+            }
+        }
+    };
+
+    function setActiveTab(targetId) {
+        navLinks.forEach(link => {
+            link.classList.toggle('active', link.dataset.target === targetId);
+        });
+        contentSections.forEach(section => {
+            section.classList.toggle('active', section.id === `${targetId}-section`);
+        });
+        // Asegura que al cambiar de pestaña, el detalle de componentes se reinicie
+        if (targetId === 'componentes') {
+             componenteDetalle.innerHTML = '<p class="text-gray-500 text-lg">Seleccione una etapa del flujo para ver qué elementos la constituyen y su descripción detallada.</p>';
+        }
+         if (targetId === 'vision-general') {
+             systemDetail.innerHTML = '<p class="text-gray-500 text-lg text-center">Haga clic en una tarjeta de sistema para ver la definición y los detalles de sus elementos clave.</p>';
+        }
+    }
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            setActiveTab(link.dataset.target);
+        });
+    });
+
+    // Función para mostrar detalle de Sistemas (Visión General)
+    const systemDetail = document.getElementById('system-detail');
+    window.showSystemDetail = function(systemId) {
+        const info = data.sistemas[systemId];
+        systemDetail.innerHTML = `
+            <div class="text-left">
+                <h3 class="font-bold text-xl mb-2 text-blue-700">${info.title}</h3>
+                <p class="text-gray-700">${info.description}</p>
+            </div>
+        `;
+    };
+
+
+    // Funcionalidad para la sección Componentes (Flujo lógico)
+    const componenteBtns = document.querySelectorAll('.componente-btn');
+    const componenteDetalle = document.getElementById('componente-detalle');
+    componenteBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const id = btn.id.split('-')[1];
+            const info = data.componentes[id];
+            componenteDetalle.innerHTML = `
+                <div class="text-left">
+                    <h3 class="font-bold text-2xl mb-2 text-red-600">${info.title}</h3>
+                    <p class="text-gray-700">${info.description}</p>
+                </div>
+            `;
+            componenteBtns.forEach(b => b.classList.remove('bg-red-400'));
+            btn.classList.add('bg-red-400');
+        });
+    });
+
+    // Funcionalidad para la sección Grados de Seguridad
+    const gradosBtns = document.querySelectorAll('.grado-btn');
+    const gradoDetalle = document.getElementById('grado-detalle');
+    gradosBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const grade = btn.dataset.grade;
+            const info = data.grados[grade];
+            gradoDetalle.innerHTML = `
+                <div class="text-left">
+                    <h3 class="font-bold text-xl mb-2 text-center md:text-left text-blue-800">${info.title}</h3>
+                    <p class="text-gray-700">${info.description}</p>
+                </div>
+            `;
+            gradosBtns.forEach(b => b.classList.remove('bg-blue-500', 'text-white'));
+            btn.classList.add('bg-blue-500', 'text-white');
+        });
+    });
+
+    // Inicialización del Gráfico de Grados
+    const ctx = document.getElementById('gradosChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Grado 1', 'Grado 2', 'Grado 3', 'Grado 4'],
+            datasets: [{
+                label: 'Nivel de Riesgo y Resistencia a Sabotaje',
+                data: [25, 50, 75, 100],
+                backgroundColor: [
+                    'rgba(191, 219, 254, 0.9)',
+                    'rgba(147, 197, 253, 0.9)',
+                    'rgba(96, 165, 250, 0.9)',
+                    'rgba(59, 130, 246, 0.9)'
+                ],
+                borderColor: [
+                    'rgba(59, 130, 246, 1)',
+                    'rgba(59, 130, 246, 1)',
+                    'rgba(59, 130, 246, 1)',
+                    'rgba(59, 130, 246, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            if (value === 25) return 'Bajo';
+                            if (value === 50) return 'Bajo-Medio';
+                            if (value === 75) return 'Medio-Alto';
+                            if (value === 100) return 'Alto';
+                            return '';
+                        }
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            let value = context.parsed.y;
+                            let riskLabel = '';
+                            if (value <= 25) riskLabel = 'Riesgo Bajo (Intruso Accidental)';
+                            else if (value <= 50) riskLabel = 'Riesgo Bajo-Medio (Intruso Ocasional)';
+                            else if (value <= 75) riskLabel = 'Riesgo Medio-Alto (Intruso con Conocimiento)';
+                            else riskLabel = 'Riesgo Alto (Ataque Planificado)';
+                            return riskLabel;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    setActiveTab('vision-general');
+
+});
+</script>
+
+</body>
+</html>
