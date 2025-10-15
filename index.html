@@ -181,6 +181,12 @@
                     </h3>
                     <p class="text-gray-700 mb-4">Introduce cualquier término relacionado con la UT1 (ej. "Detector Magnético", "Doble Vía de Comunicación", "Grado 4") para obtener una explicación concisa de experto.</p>
                     
+                    <!-- INPUT API KEY -->
+                    <div class="mb-4 p-3 bg-white rounded-lg border border-orange-300">
+                        <label for="local-api-key-ut1" class="block text-sm font-medium text-orange-700 mb-1">Clave API de Gemini (Opcional):</label>
+                        <input type="text" id="local-api-key-ut1" placeholder="Pega aquí tu clave personal si estás usando la web localmente (o déjalo vacío)" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm" />
+                    </div>
+
                     <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3 mb-4">
                         <input type="text" id="explanation-input" placeholder="Escribe el concepto a profundizar..." class="flex-grow p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" value="Grado 3" />
                         <button id="generate-explanation-btn" class="bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-200 flex items-center justify-center">
@@ -244,6 +250,12 @@
                             </h3>
                             <p class="text-gray-700 mb-4">¿Preguntas sobre una ley, un Real Decreto específico o una medida de PRL para un trabajo concreto? Pregunta aquí para obtener una respuesta fundamentada con información web en tiempo real.</p>
                             
+                            <!-- INPUT API KEY -->
+                            <div class="mb-4 p-3 bg-white rounded-lg border border-orange-300">
+                                <label for="local-api-key-ut9" class="block text-sm font-medium text-orange-700 mb-1">Clave API de Gemini (Opcional):</label>
+                                <input type="text" id="local-api-key-ut9" placeholder="Pega aquí tu clave personal si estás usando la web localmente (o déjalo vacío)" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm" />
+                            </div>
+
                             <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3 mb-4">
                                 <input type="text" id="regulation-input" placeholder="Ej. ¿Qué exige el REBT para la toma de tierra de una Central?" class="flex-grow p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" value="¿Qué exige la Ley de Seguridad Privada para los sistemas de Grado 4?" />
                                 <button id="generate-regulation-btn" class="bg-orange-600 hover:bg-orange-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-200 flex items-center justify-center">
@@ -388,16 +400,29 @@
     
     // --- CONFIGURACIÓN Y FUNCIONES BASE DEL API GEMINI ---
     const API_URL_GEMINI = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=';
-    const API_KEY = ""; // Será inyectada por el entorno Canvas
+    
+    // NOTA IMPORTANTE: Esta clave se inyecta automáticamente en el entorno de Canvas.
+    // Si ejecutas el archivo localmente o fuera de este entorno, puedes pegar tu clave
+    // personal en el campo de texto opcional en la interfaz para que funcione.
+    const API_KEY = ""; 
     
     /**
      * Llama al API de Gemini con manejo de reintentos y configuración dinámica.
      * @param {string} userQuery - La pregunta del usuario.
      * @param {string} systemPrompt - Instrucción para el modelo.
      * @param {boolean} useGrounding - Si debe usar Google Search (grounding).
+     * @param {string} localApiKey - Clave pegada por el usuario en el input (si existe).
      * @returns {Promise<{text: string, sources: Array<{uri: string, title: string}>}>}
      */
-    async function callGeminiApi(userQuery, systemPrompt, useGrounding) {
+    async function callGeminiApi(userQuery, systemPrompt, useGrounding, localApiKey) {
+        
+        // Determinar qué clave usar: la inyectada por el entorno o la pegada por el usuario
+        const keyToUse = API_KEY || localApiKey;
+
+        if (!keyToUse) {
+            throw new Error("Clave de API de Gemini no proporcionada. Por favor, pega tu clave en el campo 'Clave API de Gemini' para usar esta función fuera del entorno Canvas.");
+        }
+        
         const payload = {
             contents: [{ parts: [{ text: userQuery }] }],
             systemInstruction: { parts: [{ text: systemPrompt }] },
@@ -409,14 +434,20 @@
 
         while (attempt < maxRetries) {
             try {
-                const response = await fetch(`${API_URL_GEMINI}${API_KEY}`, {
+                const response = await fetch(`${API_URL_GEMINI}${keyToUse}`, { // Usa keyToUse aquí
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
 
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    // Intento de capturar errores específicos (ej. 400 Bad Request, 403 Forbidden)
+                    const errorBody = await response.text();
+                    console.error("Error API response:", response.status, errorBody);
+                    if (response.status === 400 || response.status === 403) {
+                         throw new Error(`Error en la llamada a la API (${response.status}). La clave podría ser inválida o el formato de la petición incorrecto.`);
+                    }
+                    throw new Error(`Error HTTP! Estado: ${response.status}`);
                 }
                 
                 const result = await response.json();
@@ -466,21 +497,19 @@
         // Convertir negritas (**) a <strong>
         let htmlText = markdownText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
         
-        // Convertir listas simples (asume que los guiones son listas en este contexto)
-        htmlText = htmlText.replace(/^- (.*)/gm, '<li>$1</li>');
-        if (htmlText.includes('<li>')) {
-            htmlText = '<ul>' + htmlText + '</ul>';
-        }
-
-        // Convertir saltos de línea (\n) a <br> solo si no están dentro de <ul>
-        // Esta es una simplificación; para listas solo queremos los <li>
-        if (markdownText.includes('- ')) {
-             // Si hay listas, solo sustituimos saltos de línea múltiples
-            htmlText = htmlText.replace(/(\r\n|\n|\r){2,}/g, '<br><br>');
+        // Manejo básico de listas si el texto empieza con guiones y saltos de línea
+        let listItems = htmlText.match(/^- (.*)$/gm);
+        if (listItems) {
+            // Reemplaza los guiones de lista con <li> y envuelve en <ul>
+            htmlText = '<ul>' + listItems.map(item => `<li>${item.substring(2)}</li>`).join('') + '</ul>';
         } else {
-            // Si no hay listas, convertimos todos los saltos de línea a <br>
+            // Si no hay listas, convertir saltos de línea a <br>
              htmlText = htmlText.replace(/(\r\n|\n|\r)/g, '<br>');
         }
+        
+        // Asegurar que el texto entre bloques de lista sigue usando <br> si es necesario
+        // (Esto es una solución simple para mantener la legibilidad)
+        htmlText = htmlText.replace(/<\/ul>\s*(\r\n|\n|\r)/g, '</ul><br>');
 
         return htmlText;
     }
@@ -494,34 +523,38 @@
     });
 
     function setupGeminiFeatures() {
+        // UT1 Elements
+        const localApiKeyUt1 = document.getElementById('local-api-key-ut1');
         const explanationInput = document.getElementById('explanation-input');
         const explanationButton = document.getElementById('generate-explanation-btn');
         const explanationResult = document.getElementById('explanation-result');
         const explanationLoader = document.getElementById('explanation-loader');
 
+        // UT9 Elements
+        const localApiKeyUt9 = document.getElementById('local-api-key-ut9');
         const regulationInput = document.getElementById('regulation-input');
         const regulationButton = document.getElementById('generate-regulation-btn');
         const regulationResult = document.getElementById('regulation-result');
         const regulationLoader = document.getElementById('regulation-loader');
         
         // Listener para Explicación Avanzada (UT1)
-        explanationButton.addEventListener('click', () => handleAdvancedExplanation(explanationInput, explanationResult, explanationLoader));
+        explanationButton.addEventListener('click', () => handleAdvancedExplanation(explanationInput, explanationResult, explanationLoader, localApiKeyUt1.value.trim()));
         explanationInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
-                handleAdvancedExplanation(explanationInput, explanationResult, explanationLoader);
+                handleAdvancedExplanation(explanationInput, explanationResult, explanationLoader, localApiKeyUt1.value.trim());
             }
         });
 
         // Listener para Asesor de Normativa (UT9)
-        regulationButton.addEventListener('click', () => handleRegulationAdvisor(regulationInput, regulationResult, regulationLoader));
+        regulationButton.addEventListener('click', () => handleRegulationAdvisor(regulationInput, regulationResult, regulationLoader, localApiKeyUt9.value.trim()));
         regulationInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
-                handleRegulationAdvisor(regulationInput, regulationResult, regulationLoader);
+                handleRegulationAdvisor(regulationInput, regulationResult, regulationLoader, localApiKeyUt9.value.trim());
             }
         });
     }
 
-    async function handleAdvancedExplanation(inputElement, resultElement, loaderElement) {
+    async function handleAdvancedExplanation(inputElement, resultElement, loaderElement, localApiKey) {
         const query = inputElement.value.trim();
         if (!query) {
             resultElement.innerHTML = `<p class="text-red-500 font-semibold">Por favor, introduce un concepto para explicar.</p>`;
@@ -532,11 +565,10 @@
         resultElement.innerHTML = '';
         loaderElement.classList.remove('hidden');
 
-        // INSTRUCCIÓN CLAVE DE FORMATO AÑADIDA
         const systemPrompt = "Actúa como un profesor experto en sistemas de seguridad electrónica (UT1). Proporciona una explicación concisa, bien estructurada con saltos de línea y utilizando **Markdown para negritas** en los términos técnicos importantes. La respuesta debe tener un tono profesional y centrarse en la definición y función del concepto.";
         
         try {
-            const { text } = await callGeminiApi(query, systemPrompt, false);
+            const { text } = await callGeminiApi(query, systemPrompt, false, localApiKey);
 
             // 2. Renderizar y Mostrar resultado
             const formattedText = renderMarkdownToHtml(text);
@@ -555,7 +587,7 @@
     }
 
 
-    async function handleRegulationAdvisor(inputElement, resultElement, loaderElement) {
+    async function handleRegulationAdvisor(inputElement, resultElement, loaderElement, localApiKey) {
         const query = inputElement.value.trim();
         if (!query) {
             resultElement.innerHTML = `<p class="text-red-500 font-semibold">Por favor, introduce una pregunta sobre normativa o PRL.</p>`;
@@ -569,11 +601,10 @@
         const englishQuery = translateToEnglishForSearch(query); 
         const combinedQuery = `Consulta sobre normativa española de seguridad electrónica o PRL: "${query}" / English query: "${englishQuery}"`;
 
-        // INSTRUCCIÓN CLAVE DE FORMATO AÑADIDA
         const systemPrompt = "Actúa como un consultor especialista en normativas españolas (REBT, Ley de Seguridad Privada, PRL). Basándote EXCLUSIVAMENTE en la información encontrada, responde de forma profesional, concisa y **bien formateada con Markdown (saltos de línea, negritas en términos legales/decretos)**. Responde en español y cita las fuentes utilizadas al final.";
         
         try {
-            const { text, sources } = await callGeminiApi(combinedQuery, systemPrompt, true);
+            const { text, sources } = await callGeminiApi(combinedQuery, systemPrompt, true, localApiKey);
 
             // 2. Renderizar y Mostrar resultado
             const formattedText = renderMarkdownToHtml(text);
@@ -591,7 +622,7 @@
             `;
         } catch (error) {
             // 3. Manejar error
-            resultElement.innerHTML = `<p class="text-red-500 font-semibold">Error al consultar la normativa. Verifica tu conexión o intenta con otra pregunta. (${error.message})</p>`;
+            resultElement.innerHTML = `<p class="text-red-500 font-semibold">Error al consultar la normativa. Verifica la clave o intenta con otra pregunta. (${error.message})</p>`;
         } finally {
             // 4. Ocultar cargador
             loaderElement.classList.add('hidden');
